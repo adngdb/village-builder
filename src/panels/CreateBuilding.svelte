@@ -1,11 +1,11 @@
 <script>
     import { createEventDispatcher } from 'svelte';
 
-    import BUILDINGS from './data/buildings';
-    import resources from './stores/resources';
-    import villageMap from './stores/villageMap';
+    import BUILDINGS from '../data/buildings';
+    import resources from '../stores/resources';
+    import villageMap from '../stores/villageMap';
 
-    import BuildingResources from './BuildingResources.svelte';
+    import BuildingResources from '../BuildingResources.svelte';
 
     export let tileIndex;
 

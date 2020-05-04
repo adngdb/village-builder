@@ -3,7 +3,9 @@
 
 	import endTurn from './actions/endTurn';
 
-	import CreateBuilding from './CreateBuilding.svelte';
+	import BuildingDetails from './panels/BuildingDetails.svelte';
+	import CreateBuilding from './panels/CreateBuilding.svelte';
+
 	import HexTile from './HexTile.svelte';
 	import Resources from './Resources.svelte';
 
@@ -17,9 +19,11 @@
 
 	function onCreateBuilding(event) {
 		buildingOnTile = event.detail.tileIndex;
+		upgradingOnTile = null;
 	}
 
 	function onUpgradeBuilding(event) {
+		buildingOnTile = null;
 		upgradingOnTile = event.detail.tileIndex;
 	}
 </script>
@@ -38,6 +42,10 @@
 		on:cancel={ onCancel }
 	/>
 	{ :else if upgradingOnTile !== null }
+	<BuildingDetails
+		tileIndex={ upgradingOnTile }
+		on:cancel={ onCancel }
+	/>
 	{ /if }
 	<section class="village-map">
 	{ #each $villageMap as line }
