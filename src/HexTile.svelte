@@ -1,6 +1,16 @@
 <script>
-    export let content = '';
+    import villageMap from './stores/villageMap';
+
+    export let data = {};
     export let empty = false;
+
+    function clickTile() {
+        if (data.content) {
+            return;
+        }
+
+        villageMap.setTile(data.index, 'F1');
+    }
 </script>
 
 <style>
@@ -68,6 +78,6 @@
     }
 </style>
 
-<div class="hexagon" class:empty>
-    <span>{content}</span>
+<div class="hexagon" class:empty on:click={clickTile}>
+    <span>{ data.content }</span>
 </div>

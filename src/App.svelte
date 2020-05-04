@@ -14,10 +14,10 @@
 	{ #each $villageMap as line }
 	<div>
 		{ #each line as tile }
-			{ #if tile === villageMap.EMPTY }
+			{ #if tile.content === villageMap.EMPTY_TILE }
 			<HexTile empty></HexTile>
 			{ :else }
-			<HexTile content="{tile}"></HexTile>
+			<HexTile data={ tile }></HexTile>
 			{ /if }
 		{ /each }
 	</div>
