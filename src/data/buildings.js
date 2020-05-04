@@ -7,6 +7,7 @@ const TYPES = {
 
 export default {
     TYPES,
+
     [TYPES.FARM]: {
         name: 'Farm',
         maxLevel: 5,
@@ -26,6 +27,7 @@ export default {
             5: { wood: 1000 },
         },
     },
+
     [TYPES.SAWMILL]: {
         name: 'Sawmill',
         maxLevel: 5,
@@ -45,6 +47,7 @@ export default {
             5: { wood: 1000 },
         },
     },
+
     [TYPES.QUARRY]: {
         name: 'Quarry',
         maxLevel: 5,

@@ -10,10 +10,18 @@
         display: inline;
         margin: 1vw;
     }
+    img {
+        height: 1em;
+        width: 1em;
+    }
 </style>
 
 <ul>
     { #each resources.RESOURCES as res }
-    <li>{ res.name }: { $resources[res.key] }</li>
+    <li>
+        { res.name }:
+        <strong>{ $resources[res.key] }</strong>
+        <img src={ `img/${res.key}.svg` } alt={ res.key } />
+    </li>
     { /each }
 </ul>
