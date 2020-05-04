@@ -5,11 +5,11 @@
     export let empty = false;
 
     function clickTile() {
-        if (data.content) {
+        if (data.building) {
             return;
         }
 
-        villageMap.setTile(data.index, 'F1');
+        villageMap.createBuilding(data.index, 'F');
     }
 </script>
 
@@ -79,5 +79,7 @@
 </style>
 
 <div class="hexagon" class:empty on:click={clickTile}>
-    <span>{ data.content }</span>
+    { #if data.building }
+    <span>{ data.building } { data.level }</span>
+    { /if }
 </div>

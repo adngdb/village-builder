@@ -1,28 +1,59 @@
 import { derived, writable } from 'svelte/store';
 
 const EMPTY_TILE = -1;
+const DEFAULT_TILE = {
+    building: null,
+    level: 0,
+    isBuilding: false,
+    turnsToCompletion: 0,
+};
 
 const MAP_SIZE = 5;
 const MAP_STRUCTURE = [
-    EMPTY_TILE, '', '', '', EMPTY_TILE,
-    '', '', '', '', '',
-    '', '', '', '', '',
-    '', '', 'G3', '', '',
-    EMPTY_TILE, EMPTY_TILE, 'F1', EMPTY_TILE, EMPTY_TILE,
+    EMPTY_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, EMPTY_TILE,
+    DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE,
+    DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE,
+    DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE,
+    EMPTY_TILE, EMPTY_TILE, DEFAULT_TILE, EMPTY_TILE, EMPTY_TILE,
 ];
 
 
 const internalMap = writable(MAP_STRUCTURE);
 
 
-const setTile = (index, value) => {
+const createBuilding = (index, buildingType) => {
     internalMap.update(map => {
-        if (map[index] === EMPTY_TILE) {
+        if (map[index] === EMPTY_TILE || map[index].building) {
             return map;
         }
         const newMap = [ ...map ];
-        newMap[index] = value;
+        newMap[index] = {
+            ...newMap[index],
+            building: buildingType,
+            isBuilding: true,
+            turnsToCompletion: 1,
+        };
         return newMap;
+    });
+};
+
+
+const build = () => {
+    internalMap.update(map => {
+        return map.map(tile => {
+            if (tile === EMPTY_TILE || !tile.isBuilding) {
+                return tile;
+            }
+
+            const newTile = { ...tile };
+            newTile.turnsToCompletion--;
+            if (newTile.turnsToCompletion === 0) {
+                newTile.isBuilding = false;
+                newTile.level++;
+            }
+
+            return newTile;
+        });
     });
 };
 
@@ -35,8 +66,11 @@ const villageMap = derived(internalMap, ($internalMap) => {
     while (n < $internalMap.length) {
         const chunk = $internalMap.slice(n, n + MAP_SIZE);
         map.push(chunk.map((item, index) => {
+            if (item === EMPTY_TILE) {
+                return item;
+            }
             return {
-                content: item,
+                ...item,
                 index: n + index,
             };
         }));
@@ -48,7 +82,8 @@ const villageMap = derived(internalMap, ($internalMap) => {
 
 export default {
     subscribe: villageMap.subscribe,
-    setTile,
+    build,
+    createBuilding,
     EMPTY_TILE,
     MAP_SIZE,
 };

@@ -1,7 +1,9 @@
 <script>
-	import HexTile from './HexTile.svelte';
-
 	import villageMap from './stores/villageMap';
+
+	import endTurn from './actions/endTurn';
+
+	import HexTile from './HexTile.svelte';
 </script>
 
 <style>
@@ -14,7 +16,7 @@
 	{ #each $villageMap as line }
 	<div>
 		{ #each line as tile }
-			{ #if tile.content === villageMap.EMPTY_TILE }
+			{ #if tile === villageMap.EMPTY_TILE }
 			<HexTile empty></HexTile>
 			{ :else }
 			<HexTile data={ tile }></HexTile>
@@ -22,4 +24,5 @@
 		{ /each }
 	</div>
 	{ /each }
+	<button on:click={ endTurn }>End Turn</button>
 </main>
