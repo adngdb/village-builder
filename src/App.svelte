@@ -1,5 +1,7 @@
 <script>
 	import HexTile from './HexTile.svelte';
+
+	import villageMap from './stores/villageMap';
 </script>
 
 <style>
@@ -9,14 +11,15 @@
 </style>
 
 <main>
+	{ #each $villageMap as line }
 	<div>
-		<HexTile content="F1"></HexTile>
-		<HexTile content="W2"></HexTile>
-		<HexTile content="S3"></HexTile>
+		{ #each line as tile }
+			{ #if tile === villageMap.EMPTY }
+			<HexTile empty></HexTile>
+			{ :else }
+			<HexTile content="{tile}"></HexTile>
+			{ /if }
+		{ /each }
 	</div>
-	<div>
-		<HexTile></HexTile>
-		<HexTile></HexTile>
-		<HexTile></HexTile>
-	</div>
+	{ /each }
 </main>

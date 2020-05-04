@@ -1,5 +1,6 @@
 <script>
     export let content = '';
+    export let empty = false;
 </script>
 
 <style>
@@ -45,6 +46,16 @@
         background-color: hsla(60, 75%, 50%, 1.0);
         z-index: 110;
     }
+    .hexagon.empty {
+        position: relative;
+        display: none;
+        width: 67em;
+        height: 116em;
+        margin: 1em 18em;
+    }
+    .hexagon.empty:nth-child(even) {
+        top: 59em;
+    }
     .hexagon > span {
         position: absolute;
         top: 50%;
@@ -57,6 +68,6 @@
     }
 </style>
 
-<div class="hexagon">
+<div class="hexagon" class:empty>
     <span>{content}</span>
 </div>
