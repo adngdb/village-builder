@@ -1,34 +1,41 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
+
     import BUILDINGS from './data/buildings';
     import villageMap from './stores/villageMap';
 
     export let data = {};
     export let empty = false;
 
+    const dispatch = createEventDispatcher();
+
     function clickTile() {
         if (data.building) {
-            villageMap.upgradeBuilding(data.index);
+            // villageMap.upgradeBuilding(data.index);
+            dispatch('upgrade', { tileIndex: data.index });
         }
-
-        villageMap.createBuilding(data.index, BUILDINGS.TYPES.FARM);
+        else {
+            // villageMap.createBuilding(data.index, BUILDINGS.TYPES.FARM);
+            dispatch('create', { tileIndex: data.index });
+        }
     }
 </script>
 
 <style>
     /* Source: https://codepen.io/gpyne/pen/iElhp */
     .hexagon {
-        font-size: 0.1vmin;
+        font-size: 1.4vmin;
         position: relative;
         display: inline-block;
-        margin: 1em 18em;
+        margin: 0.1em 1.8em;
         background-color: hsl(220, 75%, 75%);
         text-align: center;
     }
     .hexagon,
     .hexagon::before,
     .hexagon::after {
-        width: 67em;
-        height: 116em;
+        width: 6.7em;
+        height: 11.6em;
         border-radius: 20%/5%;
     }
     .hexagon::before {
@@ -46,7 +53,7 @@
         transform: rotate(60deg);
     }
     .hexagon:nth-child(even) {
-        top: 59em;
+        top: 5.9em;
     }
     .hexagon:hover {
         background-color: hsla(60, 75%, 75%, 1.0);
@@ -60,12 +67,12 @@
     .hexagon.empty {
         position: relative;
         display: none;
-        width: 67em;
-        height: 116em;
-        margin: 1em 18em;
+        width: 6.7em;
+        height: 11.6em;
+        margin: 0.1em 1.8em;
     }
     .hexagon.empty:nth-child(even) {
-        top: 59em;
+        top: 5.9em;
     }
     .hexagon > span {
         position: absolute;
