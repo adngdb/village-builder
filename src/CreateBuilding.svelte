@@ -2,6 +2,7 @@
     import { createEventDispatcher } from 'svelte';
 
     import BUILDINGS from './data/buildings';
+    import resources from './stores/resources';
     import villageMap from './stores/villageMap';
 
     import BuildingResources from './BuildingResources.svelte';
@@ -16,8 +17,12 @@
 
     function getBuildFn(building) {
         return () => {
-            villageMap.createBuilding(tileIndex, building);
-            cancel();
+            const cost = BUILDINGS[building].cost[0];
+            if (resources.canPayCost(cost)) {
+                resources.payCost(cost);
+                villageMap.createBuilding(tileIndex, building);
+                cancel();
+            }
         };
     }
 </script>
@@ -28,6 +33,7 @@
         width: 100%;
         z-index: 200;
     }
+
     .panel {
         background-color: white;
         border: 0.1vmin solid black;
@@ -83,7 +89,14 @@
                             resources={ BUILDINGS[building].output[1] }
                         />
                     </td>
-                    <td><button on:click={ getBuildFn(building) }>Build</button></td>
+                    <td>
+                        <button
+                            on:click={ getBuildFn(building) }
+                            disabled={ !resources.canPayCost(BUILDINGS[building].cost[0]) }
+                        >
+                            Build
+                        </button>
+                    </td>
                 </tr>
                 { /each }
             </tbody>

@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 
 
 const RESOURCES = [
@@ -24,21 +24,44 @@ const DEFAULT_RESOURCES = {
 };
 
 
-const { subscribe, set, update } = writable(DEFAULT_RESOURCES);
+const resources = writable(DEFAULT_RESOURCES);
 
 
 function gain(type, value) {
-    update(resources => {
+    resources.update(res => {
         return {
-            ...resources,
-            [type]: resources[type] + value,
+            ...res,
+            [type]: res[type] + value,
         };
     });
 }
 
 
+function lose(type, value) {
+    gain(type, -value);
+}
+
+
+function canPayCost(cost) {
+    const res = get(resources);
+    return Object.entries(cost).every(
+        ([ type, value ]) => res[type] >= value
+    );
+}
+
+
+function payCost(cost) {
+    return Object.entries(cost).every(
+        ([ type, value ]) => lose(type, value)
+    );
+}
+
+
 export default {
-    subscribe,
+    subscribe: resources.subscribe,
+    canPayCost,
     gain,
+    lose,
+    payCost,
     RESOURCES,
 };
