@@ -6,7 +6,7 @@
 
     function clickTile() {
         if (data.building) {
-            return;
+            villageMap.upgradeBuilding(data.index);
         }
 
         villageMap.createBuilding(data.index, 'F');

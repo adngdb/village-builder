@@ -38,6 +38,22 @@ const createBuilding = (index, buildingType) => {
 };
 
 
+const upgradeBuilding = (index) => {
+    internalMap.update(map => {
+        if (map[index] === EMPTY_TILE || !map[index].building) {
+            return map;
+        }
+        const newMap = [ ...map ];
+        newMap[index] = {
+            ...newMap[index],
+            isBuilding: true,
+            turnsToCompletion: newMap[index].level + 1,
+        };
+        return newMap;
+    });
+};
+
+
 const build = () => {
     internalMap.update(map => {
         return map.map(tile => {
@@ -84,6 +100,7 @@ export default {
     subscribe: villageMap.subscribe,
     build,
     createBuilding,
+    upgradeBuilding,
     EMPTY_TILE,
     MAP_SIZE,
 };
