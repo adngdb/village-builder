@@ -9,32 +9,13 @@ export default {
     TYPES,
     [TYPES.FARM]: {
         name: 'Farm',
-        levels: {
-            1: {
-                output: {
-                    food: 5,
-                },
-            },
-            2: {
-                output: {
-                    food: 10,
-                },
-            },
-            3: {
-                output: {
-                    food: 20,
-                },
-            },
-            4: {
-                output: {
-                    food: 50,
-                },
-            },
-            5: {
-                output: {
-                    food: 100,
-                },
-            },
+        maxLevel: 5,
+        output: {
+            1: { food: 5 },
+            2: { food: 10 },
+            3: { food: 20 },
+            4: { food: 50 },
+            5: { food: 100 },
         },
     },
 };

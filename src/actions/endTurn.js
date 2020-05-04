@@ -12,7 +12,7 @@ function produceResources() {
         .filter(t => t.building && t.level > 0);
 
     buildings.forEach(tile => {
-        const output = BUILDINGS[tile.building].levels[tile.level].output;
+        const output = BUILDINGS[tile.building].output[tile.level];
         for (const resource in output) {
             resources.gain(resource, output[resource]);
         }
