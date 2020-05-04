@@ -4,6 +4,7 @@
 	import endTurn from './actions/endTurn';
 
 	import HexTile from './HexTile.svelte';
+	import Resources from './Resources.svelte';
 </script>
 
 <style>
@@ -13,6 +14,7 @@
 </style>
 
 <main>
+	<Resources />
 	{ #each $villageMap as line }
 	<div>
 		{ #each line as tile }

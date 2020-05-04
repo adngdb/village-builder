@@ -1,4 +1,5 @@
 <script>
+    import BUILDINGS from './data/buildings';
     import villageMap from './stores/villageMap';
 
     export let data = {};
@@ -9,7 +10,7 @@
             villageMap.upgradeBuilding(data.index);
         }
 
-        villageMap.createBuilding(data.index, 'F');
+        villageMap.createBuilding(data.index, BUILDINGS.TYPES.FARM);
     }
 </script>
 
@@ -80,6 +81,6 @@
 
 <div class="hexagon" class:empty on:click={clickTile}>
     { #if data.building }
-    <span>{ data.building } { data.level }</span>
+    <span>{ BUILDINGS[data.building].name } { data.level }</span>
     { /if }
 </div>
