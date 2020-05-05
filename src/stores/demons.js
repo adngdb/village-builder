@@ -14,6 +14,11 @@ function getStrength(x) {
 const demons = writable(getStrength(1));
 
 
+function reset() {
+    demons.set(getStrength(1));
+}
+
+
 function getNextAttackTurn() {
     const currentTurn = get(turn);
     return Math.ceil(currentTurn / TURNS_BETWEEN_ATTACKS) * TURNS_BETWEEN_ATTACKS;
@@ -32,6 +37,7 @@ function areAttackingThisTurn() {
 
 export default {
     subscribe: demons.subscribe,
+    reset,
     areAttackingThisTurn,
     computeNextStrength,
     getNextAttackTurn,

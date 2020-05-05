@@ -15,6 +15,12 @@ const army = writable(DEFAULT_SOLDIERS);
 let diedOfStarvationLastTurn = 0;
 
 
+function reset() {
+    army.set(DEFAULT_SOLDIERS);
+    diedOfStarvationLastTurn = 0;
+}
+
+
 function getRandomNonZeroSoldierType(soldiers) {
     const types = Object.keys(soldiers).filter(t => soldiers[t] > 0);
     return types[Math.floor(Math.random() * types.length)];
@@ -77,6 +83,7 @@ function loseSoldiers(percent) {
 
 export default {
     ...army,
+    reset,
     starvation,
     belliesFilled,
     loseSoldiers,

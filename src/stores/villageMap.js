@@ -21,6 +21,11 @@ const MAP_STRUCTURE = [
 const internalMap = writable(MAP_STRUCTURE);
 
 
+function reset() {
+    internalMap.set(MAP_STRUCTURE);
+}
+
+
 const createBuilding = (index, buildingType) => {
     internalMap.update(map => {
         if (map[index] === EMPTY_TILE || map[index].building) {
@@ -98,6 +103,7 @@ const villageMap = derived(internalMap, ($internalMap) => {
 
 export default {
     subscribe: villageMap.subscribe,
+    reset,
     build,
     createBuilding,
     upgradeBuilding,

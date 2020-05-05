@@ -32,6 +32,11 @@ const DEFAULT_RESOURCES = {
 const resources = writable(DEFAULT_RESOURCES);
 
 
+function reset() {
+    resources.set(DEFAULT_RESOURCES);
+}
+
+
 function gain(type, value) {
     resources.update(res => {
         return {
@@ -73,6 +78,7 @@ function payCost(cost) {
 
 export default {
     subscribe: resources.subscribe,
+    reset,
     canPayCost,
     gain,
     lose,

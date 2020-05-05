@@ -5,6 +5,7 @@ import SOLDIERS from '../data/soldiers';
 
 import army from '../stores/army';
 import demons from '../stores/demons';
+import gameOver from '../stores/gameOver';
 import resources from '../stores/resources';
 import turn from '../stores/turn';
 import villageMap from '../stores/villageMap';
@@ -59,7 +60,7 @@ function resolveAttack() {
         }
         else if (armyStrength < demonsStrength * 0.8) {
             // Dramatic loss, game over.
-            console.debug('game over');
+            gameOver.lose();
         }
         else {
             // Draw, your army takes some losses.
