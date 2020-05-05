@@ -24,7 +24,7 @@ const RESOURCES = [
 const DEFAULT_RESOURCES = {
     food: 10,
     wood: 30,
-    stone: 10,
+    stone: 20,
     iron: 10,
 };
 

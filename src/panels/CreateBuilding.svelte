@@ -2,10 +2,12 @@
     import { createEventDispatcher } from 'svelte';
 
     import BUILDINGS from '../data/buildings';
+
     import resources from '../stores/resources';
     import villageMap from '../stores/villageMap';
 
     import BuildingResources from '../BuildingResources.svelte';
+    import BuildingRecruitment from '../BuildingRecruitment.svelte';
 
     export let tileIndex;
 
@@ -25,6 +27,14 @@
             }
         };
     }
+
+    const buildingTypes = Object.values(BUILDINGS.TYPES);
+    const productionBuildings = buildingTypes.filter(
+        t => BUILDINGS[t].category === BUILDINGS.CATEGORIES.PRODUCTION
+    );
+    const militaryBuildings = buildingTypes.filter(
+        t => BUILDINGS[t].category === BUILDINGS.CATEGORIES.MILITARY
+    );
 </script>
 
 <style>
@@ -33,41 +43,6 @@
         height: 80vh;
         position: absolute;
         z-index: 200;
-    }
-
-    .panel {
-        background-color: white;
-        border: 0.1vmin solid black;
-        border-radius: 1vmin;
-        box-sizing: border-box;
-        text-align: left;
-    }
-
-    .panel h2 {
-        border-bottom: 0.4vmin solid black;
-        font-size: 2vmin;
-        font-weight: bold;
-        margin: 0;
-        padding: 1vmin;
-        text-align: center;
-    }
-
-    .panel h2 .close {
-        cursor: pointer;
-        float: right;
-    }
-
-    .panel table {
-        margin: 2vmin;
-        width: 100%;
-    }
-
-    .panel table thead {
-        font-weight: bold;
-    }
-
-    .panel .controls {
-        text-align: center;
     }
 </style>
 
@@ -78,6 +53,9 @@
             Create a New Building
         </h2>
         <table>
+            <caption>
+                Production Buildings
+            </caption>
             <thead>
                 <tr>
                     <td>Name</td>
@@ -87,7 +65,7 @@
                 </tr>
             </thead>
             <tbody>
-                { #each Object.values(BUILDINGS.TYPES) as building }
+                { #each productionBuildings as building }
                 <tr>
                     <td>{ BUILDINGS[building].name }</td>
                     <td>
@@ -100,7 +78,45 @@
                             resources={ BUILDINGS[building].output[1] }
                         />
                     </td>
+                    <td class="controls">
+                        <button
+                            on:click={ getBuildFn(building) }
+                            disabled={ !resources.canPayCost(BUILDINGS[building].cost[0]) }
+                        >
+                            Build
+                        </button>
+                    </td>
+                </tr>
+                { /each }
+            </tbody>
+        </table>
+        <table>
+            <caption>
+                Military Buildings
+            </caption>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Cost</td>
+                    <td>Recruits</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                { #each militaryBuildings as building }
+                <tr>
+                    <td>{ BUILDINGS[building].name }</td>
                     <td>
+                        <BuildingResources
+                            resources={ BUILDINGS[building].cost[0] }
+                        />
+                    </td>
+                    <td>
+                        <BuildingRecruitment
+                            recruitment={ BUILDINGS[building].recruitment }
+                        />
+                    </td>
+                    <td class="controls">
                         <button
                             on:click={ getBuildFn(building) }
                             disabled={ !resources.canPayCost(BUILDINGS[building].cost[0]) }

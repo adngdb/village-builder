@@ -1,15 +1,27 @@
+import SOLDIERS from './soldiers';
+
+
 const TYPES = {
     FARM: 'buildings/FARM',
     SAWMILL: 'buildings/SAWMILL',
     QUARRY: 'buildings/QUARRY',
     MINE: 'buildings/MINE',
+    BARRACK: 'buildings/BARRACK',
+};
+
+
+const CATEGORIES = {
+    PRODUCTION: 'buildings/PRODUCTION',
+    MILITARY: 'buildings/MILITARY',
 };
 
 
 export default {
     TYPES,
+    CATEGORIES,
 
     [TYPES.FARM]: {
+        category: CATEGORIES.PRODUCTION,
         name: 'Farm',
         maxLevel: 5,
         output: {
@@ -30,6 +42,7 @@ export default {
     },
 
     [TYPES.SAWMILL]: {
+        category: CATEGORIES.PRODUCTION,
         name: 'Sawmill',
         maxLevel: 5,
         output: {
@@ -50,6 +63,7 @@ export default {
     },
 
     [TYPES.QUARRY]: {
+        category: CATEGORIES.PRODUCTION,
         name: 'Quarry',
         maxLevel: 5,
         output: {
@@ -70,6 +84,7 @@ export default {
     },
 
     [TYPES.MINE]: {
+        category: CATEGORIES.PRODUCTION,
         name: 'Mine',
         maxLevel: 5,
         output: {
@@ -86,6 +101,23 @@ export default {
             3: { wood: 300 },
             4: { wood: 800 },
             5: { wood: 2000 },
+        },
+    },
+
+    [TYPES.BARRACK]: {
+        category: CATEGORIES.MILITARY,
+        name: 'Barrack',
+        maxLevel: 3,
+        recruitment: {
+            1: [ SOLDIERS.TYPES.INFANTRY ],
+            2: [ SOLDIERS.TYPES.INFANTRY ],
+            3: [ SOLDIERS.TYPES.INFANTRY, SOLDIERS.TYPES.VETERAN ],
+        },
+        cost: {
+            0: { wood: 10, stone: 20 },
+            1: { wood: 15, stone: 30 },
+            2: { wood: 25, stone: 50 },
+            3: { wood: 40, stone: 80 },
         },
     },
 };

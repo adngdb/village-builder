@@ -14,7 +14,10 @@ import villageMap from '../stores/villageMap';
 function produceResources() {
     const buildings = get(villageMap).flat()
         .filter(t => t !== villageMap.EMPTY_TILE)
-        .filter(t => t.building && t.level > 0);
+        .filter(t => t.building && t.level > 0)
+        .filter(
+            t => BUILDINGS[t.building].category === BUILDINGS.CATEGORIES.PRODUCTION
+        );
 
     buildings.forEach(tile => {
         const output = BUILDINGS[tile.building].output[tile.level];

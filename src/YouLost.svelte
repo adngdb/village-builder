@@ -7,11 +7,14 @@
         display: grid;
         height: 100%;
     }
-    .panel {
+    .content {
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         height: 100%;
+        justify-content: space-between;
+        margin: auto;
+        padding: 0 2vmin;
     }
     h1 {
         color: rgb(162, 34, 34);
@@ -29,7 +32,7 @@
 </style>
 
 <section>
-    <div class="panel">
+    <div class="content">
         <h1>They bathed in your blood!</h1>
         <p>
             Your armies are defeated, the Demons killed your people and burned your farms.

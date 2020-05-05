@@ -7,6 +7,9 @@
 
     import BuildingResources from '../BuildingResources.svelte';
 
+    import MilitaryBuildingDetails from './MilitaryBuildingDetails.svelte';
+    import ProductionBuildingDetails from './ProductionBuildingDetails.svelte';
+
     export let tileIndex;
 
     $: tile = $villageMap.flat()[tileIndex];
@@ -35,39 +38,6 @@
         position: absolute;
         z-index: 200;
     }
-
-    .panel {
-        background-color: white;
-        border: 0.1vmin solid black;
-        border-radius: 1vmin;
-        box-sizing: border-box;
-        margin: auto;
-        text-align: left;
-    }
-
-    .panel h2 {
-        border-bottom: 0.4vmin solid black;
-        font-size: 2vmin;
-        font-weight: bold;
-        margin: 0;
-        padding: 1vmin;
-        text-align: center;
-    }
-
-    .panel h2 .close {
-        cursor: pointer;
-        float: right;
-    }
-
-    .panel h3,
-    .panel p {
-        margin: 0;
-        padding: 1vmin;
-    }
-
-    .panel .controls {
-        text-align: center;
-    }
 </style>
 
 <section>
@@ -81,22 +51,16 @@
             Construction is in progress, <strong>{ tile.turnsToCompletion }</strong> { tile.turnsToCompletion === 1 ? 'turn' : 'turns' } remaining before completion.
         </p>
         { /if }
-        { #if tile.level > 0 }
-        <p>
-            Production per turn: <BuildingResources resources={ building.output[tile.level] } />
-        </p>
-        { /if }
-        { #if tile.level < building.maxLevel }
-        <h3>Next Level ({ tile.level + 1 })</h3>
-        <p>
-            Production per turn: <BuildingResources resources={ building.output[tile.level + 1] } />
-        </p>
-        <p>
-            Construction cost: <BuildingResources resources={ building.cost[tile.level] } />
-        </p>
-        <p>
-            Turns to completion: { tile.level + 1 }
-        </p>
+        { #if building.category === BUILDINGS.CATEGORIES.PRODUCTION }
+        <ProductionBuildingDetails
+            tile={ tile }
+            building={ building }
+        />
+        { :else if building.category === BUILDINGS.CATEGORIES.MILITARY }
+        <MilitaryBuildingDetails
+            tile={ tile }
+            building={ building }
+        />
         { /if }
         <p class="controls">
             <button on:click={ cancel }>Close</button>

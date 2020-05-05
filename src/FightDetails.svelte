@@ -18,15 +18,18 @@
     section {
         height: 100%;
     }
-    .panel {
+    .menu {
         background-color: #ddd;
         border: 0.1vmin solid #aaa;
         border-bottom: none;
         border-radius: 1vmin 1vmin 0 0;
+    	box-sizing: border-box;
         display: grid;
         grid-template-columns: 1fr auto 1fr;
         height: 100%;
+        margin: auto;
         padding: 1vmin 2vmin;
+    	width: 90vmin;
     }
 
     .my-army {
@@ -60,7 +63,7 @@
 </style>
 
 <section>
-    <div class="panel">
+    <div class="menu">
         <div class="my-army">
             <h2>My Army</h2>
             <p class="strength">{ armyStrength }</p>

@@ -16,6 +16,9 @@
         $villageMap.flat()
         .filter(t => t !== villageMap.EMPTY_TILE)
         .filter(t => t.building && t.level > 0)
+        .filter(
+            t => BUILDINGS[t.building].category === BUILDINGS.CATEGORIES.PRODUCTION
+        )
         .forEach(tile => {
             const output = BUILDINGS[tile.building].output[tile.level];
             for (const resource in output) {
@@ -40,14 +43,17 @@
     section {
         height: 100%;
     }
-    .panel {
+    .menu {
         background-color: #ddd;
         border: 0.1vmin solid #aaa;
         border-top: none;
         border-radius: 0 0 1vmin 1vmin;
+    	box-sizing: border-box;
         height: 100%;
         padding: 1vmin 0;
+        margin: auto;
         margin-bottom: 2vmin;
+        width: 90vmin;
     }
     li {
         display: inline;
@@ -60,7 +66,7 @@
 </style>
 
 <section>
-    <ul class="panel">
+    <ul class="menu">
         { #each resources.RESOURCES as res }
         <li>
             <img src={ `img/${res.key}.svg` } alt={ res.key } title={ res.name } />

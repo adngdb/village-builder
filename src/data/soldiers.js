@@ -11,13 +11,15 @@ export default {
         name: 'Infantry',
         strength: 1,
         foodIntake: 1,
-        turnsToCompletion: 1,
+        turnsToRecruit: 1,
+        cost: { wood: 5, iron: 5 },
     },
 
     [TYPES.VETERAN]: {
         name: 'Veteran',
         strength: 3,
         foodIntake: 2,
-        turnsToCompletion: 2,
+        turnsToRecruit: 2,
+        cost: { wood: 20, iron: 20 },
     },
 };

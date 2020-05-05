@@ -120,7 +120,55 @@ section {
 }
 
 .panel {
-	box-sizing: border-box;
-	margin: auto;
+    background-color: white;
+    border: 0.1vmin solid black;
+    border-radius: 1vmin;
+    box-sizing: border-box;
+    margin: auto;
+    text-align: left;
 	width: 90vmin;
+}
+
+.panel h2 {
+    border-bottom: 0.4vmin solid black;
+    font-size: 2vmin;
+    font-weight: bold;
+    margin: 0;
+    padding: 1vmin 0;
+    text-align: center;
+}
+
+.panel h2 .close {
+    cursor: pointer;
+    float: right;
+	margin-right: 1vmin;
+}
+
+.panel h3,
+.panel p {
+    margin: 0;
+    padding: 1vmin 2vmin;
+}
+
+.panel .controls {
+    text-align: center;
+}
+
+.panel table {
+    margin: 2vmin;
+    width: calc(100% - 4vmin);
+}
+
+.panel table caption {
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 0.5vmin;
+    padding-bottom: 0.5vmin;
+}
+
+.panel table thead {
+    font-weight: bold;
+}
+
+.panel table .controls {
+    text-align: right;
 }
