@@ -8,7 +8,7 @@
 <style>
 	main {
 		display: grid;
-		grid-template-rows: 5vh 1fr 20vh;
+		grid-template-rows: 5vh 1fr 15vh;
 		height: 100%;
 		text-align: center;
 	}

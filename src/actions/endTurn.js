@@ -30,6 +30,15 @@ function eatFood() {
         (food, type) => food + (soldiers[type] * SOLDIERS[type].foodIntake),
         0
     );
+
+    if (foodToEat > get(resources).food) {
+        // There's not enough food, some soldiers will die.
+        army.starvation();
+    }
+    else {
+        army.belliesFilled();
+    }
+
     resources.lose('food', foodToEat);
 }
 

@@ -43,7 +43,16 @@ function gain(type, value) {
 
 
 function lose(type, value) {
-    gain(type, -value);
+    resources.update(res => {
+        let newValue = res[type] - value;
+        if (newValue < 0) {
+            newValue = 0;
+        }
+        return {
+            ...res,
+            [type]: newValue,
+        };
+    });
 }
 
 
