@@ -1,7 +1,9 @@
 import { get } from 'svelte/store';
 
 import BUILDINGS from '../data/buildings';
+import SOLDIERS from '../data/soldiers';
 
+import army from '../stores/army';
 import resources from '../stores/resources';
 import villageMap from '../stores/villageMap';
 
@@ -20,7 +22,20 @@ function produceResources() {
 }
 
 
+function eatFood() {
+    const soldiers = get(army);
+    const foodToEat = Object.keys(soldiers).reduce(
+        (food, type) => food + (soldiers[type] * SOLDIERS[type].foodIntake),
+        0
+    );
+    resources.lose('food', foodToEat);
+}
+
+
 export default function endTurn() {
     produceResources();
+    eatFood();
     villageMap.build();
+    // createSoldiers();
+    // resolveAttack();
 }
