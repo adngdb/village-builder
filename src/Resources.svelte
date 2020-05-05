@@ -1,5 +1,39 @@
 <script>
+    import BUILDINGS from './data/buildings';
+    import SOLDIERS from './data/soldiers';
+
+    import army from './stores/army';
     import resources from './stores/resources';
+    import villageMap from './stores/villageMap';
+
+    function getResourcesProduction($army, $villageMap) {
+        const prod = {};
+        resources.RESOURCES.forEach(r => {
+            prod[r.key] = 0;
+        });
+
+        // Buildings production
+        $villageMap.flat()
+        .filter(t => t !== villageMap.EMPTY_TILE)
+        .filter(t => t.building && t.level > 0)
+        .forEach(tile => {
+            const output = BUILDINGS[tile.building].output[tile.level];
+            for (const resource in output) {
+                prod[resource] += output[resource];
+            }
+        });
+
+        // Army food consumption.
+        const foodToEat = Object.keys($army).reduce(
+            (food, type) => food + ($army[type] * SOLDIERS[type].foodIntake),
+            0
+        );
+        prod['food'] -= foodToEat;
+
+        return prod;
+    }
+
+    $: resourcesProd = getResourcesProduction($army, $villageMap);
 </script>
 
 <style>
@@ -19,9 +53,17 @@
 <ul>
     { #each resources.RESOURCES as res }
     <li>
-        { res.name }:
+        <img src={ `img/${res.key}.svg` } alt={ res.key } title={ res.name } />
         <strong>{ $resources[res.key] }</strong>
-        <img src={ `img/${res.key}.svg` } alt={ res.key } />
+        (
+        { #if resourcesProd[res.key] === 0 }
+            -
+        { :else if resourcesProd[res.key] > 0 }
+            +{ resourcesProd[res.key] }
+        { :else }
+            { resourcesProd[res.key] }
+        { /if }
+        )
     </li>
     { /each }
 </ul>
