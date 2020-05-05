@@ -14,13 +14,18 @@ const RESOURCES = [
         key: 'stone',
         name: 'Stone',
     },
+    {
+        key: 'iron',
+        name: 'Iron',
+    },
 ];
 
 
 const DEFAULT_RESOURCES = {
-    food: 5,
-    wood: 10,
-    stone: 5,
+    food: 10,
+    wood: 30,
+    stone: 10,
+    iron: 10,
 };
 
 
@@ -51,7 +56,7 @@ function canPayCost(cost) {
 
 
 function payCost(cost) {
-    return Object.entries(cost).every(
+    return Object.entries(cost).forEach(
         ([ type, value ]) => lose(type, value)
     );
 }

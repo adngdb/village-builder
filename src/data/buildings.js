@@ -2,6 +2,7 @@ const TYPES = {
     FARM: 'buildings/FARM',
     SAWMILL: 'buildings/SAWMILL',
     QUARRY: 'buildings/QUARRY',
+    MINE: 'buildings/MINE',
 };
 
 
@@ -39,12 +40,12 @@ export default {
             5: { wood: 100 },
         },
         cost: {
-            0: { wood: 10 },
-            1: { wood: 30 },
-            2: { wood: 80 },
-            3: { wood: 200 },
-            4: { wood: 500 },
-            5: { wood: 1000 },
+            0: { wood: 10, stone: 5, iron: 5 },
+            1: { wood: 30, stone: 10, iron: 10 },
+            2: { wood: 80, stone: 20, iron: 20 },
+            3: { wood: 200, stone: 40, iron: 40 },
+            4: { wood: 500, stone: 60, iron: 60 },
+            5: { wood: 1000, stone: 100, iron: 100 },
         },
     },
 
@@ -59,12 +60,32 @@ export default {
             5: { stone: 100 },
         },
         cost: {
-            0: { wood: 10 },
-            1: { wood: 30 },
-            2: { wood: 80 },
-            3: { wood: 200 },
-            4: { wood: 500 },
-            5: { wood: 1000 },
+            0: { wood: 20 },
+            1: { wood: 40 },
+            2: { wood: 120 },
+            3: { wood: 300 },
+            4: { wood: 800 },
+            5: { wood: 2000 },
+        },
+    },
+
+    [TYPES.MINE]: {
+        name: 'Mine',
+        maxLevel: 5,
+        output: {
+            1: { iron: 5 },
+            2: { iron: 10 },
+            3: { iron: 20 },
+            4: { iron: 50 },
+            5: { iron: 100 },
+        },
+        cost: {
+            0: { wood: 20 },
+            1: { wood: 40 },
+            2: { wood: 120 },
+            3: { wood: 300 },
+            4: { wood: 800 },
+            5: { wood: 2000 },
         },
     },
 };

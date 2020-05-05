@@ -49,6 +49,7 @@
         border-bottom: 0.4vmin solid black;
         margin: 0;
         padding: 1vmin;
+        text-align: center;
     }
 
     .panel h3,
