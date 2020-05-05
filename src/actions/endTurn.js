@@ -4,7 +4,9 @@ import BUILDINGS from '../data/buildings';
 import SOLDIERS from '../data/soldiers';
 
 import army from '../stores/army';
+import demons from '../stores/demons';
 import resources from '../stores/resources';
+import turn from '../stores/turn';
 import villageMap from '../stores/villageMap';
 
 
@@ -38,4 +40,6 @@ export default function endTurn() {
     villageMap.build();
     // createSoldiers();
     // resolveAttack();
+    turn.next();
+    demons.computeNextStrength();
 }

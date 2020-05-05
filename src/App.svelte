@@ -6,6 +6,7 @@
 	import BuildingDetails from './panels/BuildingDetails.svelte';
 	import CreateBuilding from './panels/CreateBuilding.svelte';
 
+	import DemonsAttack from './DemonsAttack.svelte';
 	import HexTile from './HexTile.svelte';
 	import Resources from './Resources.svelte';
 
@@ -65,4 +66,5 @@
 	{ /each }
 	</section>
 	<button on:click={ endTurn }>End Turn</button>
+	<DemonsAttack />
 </main>
