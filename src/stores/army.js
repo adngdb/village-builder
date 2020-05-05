@@ -52,8 +52,32 @@ function belliesFilled() {
 }
 
 
+function loseSoldiers(percent) {
+    army.update(soldiers => {
+        const totalSoldiers = Object.keys(soldiers).reduce(
+            (count, type) => count + soldiers[type],
+            0
+        );
+        const soldiersToKill = Math.round(totalSoldiers * percent / 100);
+
+        const newArmy = { ...soldiers };
+
+        // DIE, SOLDIERS, DIE!
+        for (let i = 0; i < soldiersToKill; i++) {
+            // Choose a type of soldier at random.
+            const type = getRandomNonZeroSoldierType(newArmy);
+            // Kill one of those.
+            newArmy[type]--;
+        }
+
+        return newArmy;
+    });
+}
+
+
 export default {
     ...army,
     starvation,
     belliesFilled,
+    loseSoldiers,
 };

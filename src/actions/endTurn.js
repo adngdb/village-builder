@@ -43,12 +43,40 @@ function eatFood() {
 }
 
 
+function resolveAttack() {
+    if (demons.areAttackingThisTurn()) {
+        // Compute army's strength.
+        const soldiers = get(army);
+        const armyStrength = Object.keys(soldiers).reduce(
+            (s, t) => s + (soldiers[t] * SOLDIERS[t].strength),
+            0
+        );
+        const demonsStrength = get(demons);
+
+        if (armyStrength > demonsStrength * 1.2) {
+            // Glorious victory, no losses.
+            console.debug('glory!');
+        }
+        else if (armyStrength < demonsStrength * 0.8) {
+            // Dramatic loss, game over.
+            console.debug('game over');
+        }
+        else {
+            // Draw, your army takes some losses.
+            const combatResult = ( demonsStrength * 1.2 ) - armyStrength;
+            const percent = combatResult / armyStrength * 100;
+            army.loseSoldiers(percent);
+        }
+    }
+}
+
+
 export default function endTurn() {
     produceResources();
     eatFood();
     villageMap.build();
     // createSoldiers();
-    // resolveAttack();
+    resolveAttack();
     turn.next();
     demons.computeNextStrength();
 }
