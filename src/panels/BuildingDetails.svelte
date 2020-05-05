@@ -30,6 +30,8 @@
 
 <style>
     section {
+        display: grid;
+        height: 80vh;
         position: absolute;
         z-index: 200;
     }
@@ -39,6 +41,7 @@
         border: 0.1vmin solid black;
         border-radius: 1vmin;
         box-sizing: border-box;
+        margin: auto;
         text-align: left;
     }
 
@@ -49,6 +52,11 @@
         margin: 0;
         padding: 1vmin;
         text-align: center;
+    }
+
+    .panel h2 .close {
+        cursor: pointer;
+        float: right;
     }
 
     .panel h3,
@@ -64,7 +72,10 @@
 
 <section>
     <div class="panel">
-        <h2>{ building.name } (level: { tile.level })</h2>
+        <h2>
+            <span on:click={ cancel } class="close">X</span>
+            { building.name } (level: { tile.level })
+        </h2>
         { #if tile.isBuilding }
         <p>
             Construction is in progress, <strong>{ tile.turnsToCompletion }</strong> { tile.turnsToCompletion === 1 ? 'turn' : 'turns' } remaining before completion.

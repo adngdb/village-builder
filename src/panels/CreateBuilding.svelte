@@ -29,6 +29,8 @@
 
 <style>
     section {
+        display: grid;
+        height: 80vh;
         position: absolute;
         z-index: 200;
     }
@@ -50,6 +52,11 @@
         text-align: center;
     }
 
+    .panel h2 .close {
+        cursor: pointer;
+        float: right;
+    }
+
     .panel table {
         margin: 2vmin;
         width: 100%;
@@ -66,7 +73,10 @@
 
 <section>
     <div class="panel">
-        <h2>Create a New Building</h2>
+        <h2>
+            <span on:click={ cancel } class="close">X</span>
+            Create a New Building
+        </h2>
         <table>
             <thead>
                 <tr>
