@@ -16,8 +16,7 @@
 
 <style>
     section {
-        position: absolute;
-        bottom: 0;
+        height: 100%;
     }
     .panel {
         background-color: #ddd;
@@ -25,7 +24,8 @@
         border-bottom: none;
         border-radius: 1vmin 1vmin 0 0;
         display: grid;
-        grid-template-columns: 1fr 20vmin 1fr;
+        grid-template-columns: 1fr auto 1fr;
+        height: 100%;
         padding: 1vmin 2vmin;
     }
 
@@ -39,12 +39,23 @@
 
     .strength {
         font-size: 6vmin;
+        padding: 2vmin 0;
+    }
+
+    .next-turn {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        text-align: center;
     }
 
     .next-turn button {
+        background: rgb(255, 186, 33);
+		border: 0.4vmin solid rgb(196, 141, 0);
         border-radius: 100%;
-        height: 10vmin;
-        width: 10vmin;
+        height: 10vh;
+        margin: auto;
+        width: 10vh;
     }
 </style>
 

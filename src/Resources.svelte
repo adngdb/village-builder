@@ -37,11 +37,15 @@
 </script>
 
 <style>
+    section {
+        height: 100%;
+    }
     .panel {
         background-color: #ddd;
         border: 0.1vmin solid #aaa;
         border-top: none;
         border-radius: 0 0 1vmin 1vmin;
+        height: 100%;
         padding: 1vmin 0;
         margin-bottom: 2vmin;
     }
