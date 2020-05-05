@@ -24,7 +24,7 @@
 <style>
     /* Source: https://codepen.io/gpyne/pen/iElhp */
     .hexagon {
-        font-size: 1.4vmin;
+        font-size: 1.3vmin;
         position: relative;
         display: inline-block;
         margin: 0.1em 1.8em;

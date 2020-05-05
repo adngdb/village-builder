@@ -37,8 +37,13 @@
 </script>
 
 <style>
-    ul {
-        list-style: none;
+    .panel {
+        background-color: #ddd;
+        border: 0.1vmin solid #aaa;
+        border-top: none;
+        border-radius: 0 0 1vmin 1vmin;
+        padding: 1vmin 0;
+        margin-bottom: 2vmin;
     }
     li {
         display: inline;
@@ -50,20 +55,22 @@
     }
 </style>
 
-<ul>
-    { #each resources.RESOURCES as res }
-    <li>
-        <img src={ `img/${res.key}.svg` } alt={ res.key } title={ res.name } />
-        <strong>{ $resources[res.key] }</strong>
-        (
-        { #if resourcesProd[res.key] === 0 }
-            -
-        { :else if resourcesProd[res.key] > 0 }
-            +{ resourcesProd[res.key] }
-        { :else }
-            { resourcesProd[res.key] }
-        { /if }
-        )
-    </li>
-    { /each }
-</ul>
+<section>
+    <ul class="panel">
+        { #each resources.RESOURCES as res }
+        <li>
+            <img src={ `img/${res.key}.svg` } alt={ res.key } title={ res.name } />
+            <strong>{ $resources[res.key] }</strong>
+            (
+            { #if resourcesProd[res.key] === 0 }
+                -
+            { :else if resourcesProd[res.key] > 0 }
+                +{ resourcesProd[res.key] }
+            { :else }
+                { resourcesProd[res.key] }
+            { /if }
+            )
+        </li>
+        { /each }
+    </ul>
+</section>

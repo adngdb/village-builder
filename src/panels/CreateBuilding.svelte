@@ -30,7 +30,6 @@
 <style>
     section {
         position: absolute;
-        width: 100%;
         z-index: 200;
     }
 
@@ -39,18 +38,20 @@
         border: 0.1vmin solid black;
         border-radius: 1vmin;
         box-sizing: border-box;
-        width: 80vmin;
-        margin: auto;
+        text-align: left;
     }
 
     .panel h2 {
         border-bottom: 0.4vmin solid black;
+        font-size: 2vmin;
+        font-weight: bold;
         margin: 0;
         padding: 1vmin;
+        text-align: center;
     }
 
     .panel table {
-        margin: 2vmin 0;
+        margin: 2vmin;
         width: 100%;
     }
 
@@ -58,8 +59,8 @@
         font-weight: bold;
     }
 
-    button {
-        cursor: pointer;
+    .panel .controls {
+        text-align: center;
     }
 </style>
 
@@ -101,6 +102,8 @@
                 { /each }
             </tbody>
         </table>
-        <button on:click={ cancel }>Cancel</button>
+        <p class="controls">
+            <button on:click={ cancel }>Cancel</button>
+        </p>
     </div>
 </section>

@@ -20,6 +20,6 @@
 
 <ul>
     { #each Object.entries(resources) as res }
-    <li>{ res[1] } <img src={ `img/${res[0]}.svg` } alt={ res[0] } /></li>
+    <li>{ res[1] }&nbsp;<img src={ `img/${res[0]}.svg` } alt={ res[0] } /></li>
     { /each }
 </ul>

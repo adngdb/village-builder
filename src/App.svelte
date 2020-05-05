@@ -1,12 +1,10 @@
 <script>
 	import villageMap from './stores/villageMap';
 
-	import endTurn from './actions/endTurn';
-
 	import BuildingDetails from './panels/BuildingDetails.svelte';
 	import CreateBuilding from './panels/CreateBuilding.svelte';
 
-	import DemonsAttack from './DemonsAttack.svelte';
+	import FightDetails from './FightDetails.svelte';
 	import HexTile from './HexTile.svelte';
 	import Resources from './Resources.svelte';
 
@@ -65,6 +63,5 @@
 	</div>
 	{ /each }
 	</section>
-	<button on:click={ endTurn }>End Turn</button>
-	<DemonsAttack />
+	<FightDetails />
 </main>
