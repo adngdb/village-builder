@@ -64,20 +64,21 @@
         width: 20vmin;
     }
 
-    .recruitment .soldier-types li + li {
-        margin-left: 1vmin;
+    .recruitment .soldier-types li hr {
+        width: 80%;
+        margin: 0 auto;
     }
 
-    .recruitment .soldier-types li h3 {
-        line-height: 20vmin;
-        padding: 0;
+    .recruitment .soldier-types li + li {
+        margin-left: 1vmin;
     }
 
     .recruitment .soldier-types li .name {
         font-weight: bold;
     }
 
-    .recruitment .soldier-types li .queue {
+    .recruitment .soldier-types li .queue,
+    .recruitment .soldier-types li .unlock {
         background-color: rgba(128, 128, 128, 0.5);
         bottom: 0;
         box-shadow: 0 -2px 1px rgb(128, 128, 128);
@@ -88,6 +89,10 @@
 
     .recruitment .soldier-types li.active {
         background-color: rgb(237, 164, 164);
+    }
+
+    .recruitment .soldier-types li.locked {
+        background-image: url(../img/locked.svg);
     }
 
     .recruitment .soldier-types li:not(.active):hover {
@@ -129,9 +134,13 @@
         <li
             on:click={ getSelectFn(recruit) }
             class:active={ selectedSoldierType === recruit }
+            class:locked={ tile.level < building.recruitment[recruit] }
         >
             <h3 class="name">{ SOLDIERS[recruit].name }</h3>
-            { #if soldiersInQueue[recruit] }
+            <hr />
+            { #if tile.level < building.recruitment[recruit] }
+            <div class="unlock">Unlock at level { building.recruitment[recruit] }</div>
+            { :else if soldiersInQueue[recruit] }
             <div class="queue">In queue: { soldiersInQueue[recruit] }</div>
             { /if }
         </li>
@@ -173,7 +182,10 @@
             <button on:click={ setMaximumUnits }>Max</button>
             <button
                 on:click={ recruit }
-                disabled={ !selectedSoldier.canPayCost }
+                disabled={
+                    !selectedSoldier.canPayCost
+                    || tile.level < building.recruitment[selectedSoldierType]
+                }
             >
                 Recruit
             </button>
