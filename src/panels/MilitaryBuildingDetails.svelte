@@ -45,8 +45,14 @@
 </script>
 
 <style>
+    .recruitment .soldier-types {
+        display: flex;
+        justify-content: space-between;
+        margin: 2vmin;
+    }
+
     .recruitment .soldier-types li {
-        border: 1px solid #ccc;
+        border: 3px solid #ccc;
         border-radius: 0.5vmin;
         cursor: pointer;
         display: inline-block;
@@ -56,19 +62,40 @@
         text-align: center;
         width: 20vmin;
     }
+
     .recruitment .soldier-types li.active {
-        box-shadow: 0 0 1vmin red;
+        background-color: rgb(237, 164, 164);
+    }
+
+    .recruitment .soldier-types li:not(.active):hover {
+        background-color: rgb(231, 201, 201);
+        border-color: rgb(177, 110, 110);
     }
 
     .recruitment .caracteristics {
         display: flex;
         justify-content: space-around;
+        margin: 2vmin 0;
+    }
+
+    .recruitment .caracteristics img {
+        height: 1em;
+        width: 1em;
     }
 
     .recruitment .controls {
         display: grid;
         grid-template-columns: 1fr 60px auto auto;
-		grid-column-gap: 1vmin;
+        grid-column-gap: 1vmin;
+    }
+
+    @media all and (max-width: 460px) {
+        .recruitment .controls {
+            grid-template-columns: 60px auto auto;
+        }
+        .recruitment .controls input:first-child {
+            grid-column: 1 / 4;
+        }
     }
 </style>
 
@@ -85,12 +112,23 @@
         { /each }
     </ul>
     <div>
-        <p class="caracteristics">
-            <BuildingResources resources={ selectedSoldier.cost } />
-            <span>{ selectedSoldier.strength }</span>
-            <span>{ selectedSoldier.foodIntake }</span>
-            <span>{ selectedSoldier.turnsToRecruit }</span>
-        </p>
+        <ul class="caracteristics">
+            <li>
+                <BuildingResources resources={ selectedSoldier.cost } />
+            </li>
+            <li>
+                { selectedSoldier.strength }
+                <img alt="strength" src="img/strength.svg" />
+            </li>
+            <li>
+                { selectedSoldier.foodIntake }
+                <img alt="strength" src="img/meal.svg" />
+            </li>
+            <li>
+                { selectedSoldier.turnsToRecruit }
+                <img alt="strength" src="img/turn.svg" />
+            </li>
+        </ul>
         <p class="controls">
             <input
                 type="range"
