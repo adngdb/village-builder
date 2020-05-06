@@ -19,10 +19,10 @@
 
     function getBuildFn(building) {
         return () => {
-            const cost = BUILDINGS[building].cost[0];
+            const cost = building.cost[0];
             if (resources.canPayCost(cost)) {
                 resources.payCost(cost);
-                villageMap.createBuilding(tileIndex, building);
+                villageMap.createBuilding(tileIndex, building.type);
                 cancel();
             }
         };
@@ -35,6 +35,17 @@
     const militaryBuildings = buildingTypes.filter(
         t => BUILDINGS[t].category === BUILDINGS.CATEGORIES.MILITARY
     );
+
+    $: function getBuildingData(type) {
+        return {
+            ...BUILDINGS[type],
+            type,
+            canPayCost: resources.canPayCost(BUILDINGS[type].cost[0]),
+        };
+    }
+
+    $: production = productionBuildings.map(getBuildingData);
+    $: military = militaryBuildings.map(getBuildingData);
 </script>
 
 <style>
@@ -65,23 +76,23 @@
                 </tr>
             </thead>
             <tbody>
-                { #each productionBuildings as building }
+                { #each production as building }
                 <tr>
-                    <td>{ BUILDINGS[building].name }</td>
+                    <td>{ building.name }</td>
                     <td>
                         <BuildingResources
-                            resources={ BUILDINGS[building].cost[0] }
+                            resources={ building.cost[0] }
                         />
                     </td>
                     <td>
                         <BuildingResources
-                            resources={ BUILDINGS[building].output[1] }
+                            resources={ building.output[1] }
                         />
                     </td>
                     <td class="controls">
                         <button
                             on:click={ getBuildFn(building) }
-                            disabled={ !resources.canPayCost(BUILDINGS[building].cost[0]) }
+                            disabled={ !building.canPayCost }
                         >
                             Build
                         </button>
@@ -103,23 +114,23 @@
                 </tr>
             </thead>
             <tbody>
-                { #each militaryBuildings as building }
+                { #each military as building }
                 <tr>
-                    <td>{ BUILDINGS[building].name }</td>
+                    <td>{ building.name }</td>
                     <td>
                         <BuildingResources
-                            resources={ BUILDINGS[building].cost[0] }
+                            resources={ building.cost[0] }
                         />
                     </td>
                     <td>
                         <BuildingRecruitment
-                            recruitment={ BUILDINGS[building].recruitment }
+                            recruitment={ building.recruitment }
                         />
                     </td>
                     <td class="controls">
                         <button
                             on:click={ getBuildFn(building) }
-                            disabled={ !resources.canPayCost(BUILDINGS[building].cost[0]) }
+                            disabled={ !building.canPayCost }
                         >
                             Build
                         </button>
