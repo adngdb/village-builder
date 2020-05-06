@@ -5,8 +5,8 @@ import SOLDIERS from '../data/soldiers';
 
 import army from '../stores/army';
 import demons from '../stores/demons';
+import food from '../stores/food';
 import gameOver from '../stores/gameOver';
-import resources from '../stores/resources';
 import turn from '../stores/turn';
 import villageMap from '../stores/villageMap';
 import worldMap from '../stores/worldMap';
@@ -24,7 +24,12 @@ function produceResources() {
         buildings.forEach(tile => {
             const output = BUILDINGS[tile.building].output[tile.level];
             for (const resource in output) {
-                resources.gain(resource, output[resource]);
+                if (resource === 'food') {
+                    food.gain(output[resource]);
+                }
+                else {
+                    village.resources.gain(resource, output[resource]);
+                }
             }
         });
     });
@@ -38,7 +43,7 @@ function eatFood() {
         0
     );
 
-    if (foodToEat > get(resources).food) {
+    if (foodToEat > get(food)) {
         // There's not enough food, some soldiers will die.
         army.starvation();
     }
@@ -46,7 +51,7 @@ function eatFood() {
         army.belliesFilled();
     }
 
-    resources.lose('food', foodToEat);
+    food.lose(foodToEat);
 }
 
 

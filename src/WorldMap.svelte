@@ -1,13 +1,12 @@
 <script>
+	import screen from './stores/screen';
 	import worldMap from './stores/worldMap';
 
 	import HexTile from './HexTile.svelte';
 
-    export let setScreen;
-
     function getSelectVillageFn(tile) {
         return () => {
-            setScreen('village');
+            screen.goToVillage();
         };
     }
 </script>

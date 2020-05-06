@@ -3,7 +3,6 @@
 
     import BUILDINGS from '../data/buildings';
 
-    import resources from '../stores/resources';
     import worldMap from '../stores/worldMap';
 
     import BuildingResources from '../BuildingResources.svelte';
@@ -12,6 +11,7 @@
     export let tileIndex;
 
     $: village = worldMap.getSelectedVillage().map;
+    $: villageResources = worldMap.getSelectedVillage().resources;
 
     const dispatch = createEventDispatcher();
 
@@ -22,8 +22,8 @@
     function getBuildFn(building) {
         return () => {
             const cost = building.cost[0];
-            if (resources.canPayCost(cost)) {
-                resources.payCost(cost);
+            if (villageResources.canPayCost(cost)) {
+                villageResources.payCost(cost);
                 village.createBuilding(tileIndex, building.type);
                 cancel();
             }
@@ -42,12 +42,12 @@
         return {
             ...BUILDINGS[type],
             type,
-            canPayCost: resources.canPayCost(BUILDINGS[type].cost[0]),
+            canPayCost: villageResources.canPayCost(BUILDINGS[type].cost[0]),
         };
     }
 
-    $: production = productionBuildings.map(getBuildingData, $resources);
-    $: military = militaryBuildings.map(getBuildingData, $resources);
+    $: production = productionBuildings.map(getBuildingData, $villageResources);
+    $: military = militaryBuildings.map(getBuildingData, $villageResources);
 </script>
 
 <style>

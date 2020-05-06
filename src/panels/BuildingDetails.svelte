@@ -2,7 +2,6 @@
     import { createEventDispatcher } from 'svelte';
 
     import BUILDINGS from '../data/buildings';
-    import resources from '../stores/resources';
     import worldMap from '../stores/worldMap';
 
     import BuildingResources from '../BuildingResources.svelte';
@@ -13,6 +12,7 @@
     export let tileIndex;
 
     $: village = worldMap.getSelectedVillage().map;
+    $: villageResources = worldMap.getSelectedVillage().resources;
 
     $: tile = {
         ...$village.flat()[tileIndex],
@@ -28,8 +28,8 @@
 
     function upgradeBuilding() {
         const cost = building.cost[tile.level];
-        if (resources.canPayCost(cost)) {
-            resources.payCost(cost);
+        if (villageResources.canPayCost(cost)) {
+            villageResources.payCost(cost);
             village.upgradeBuilding(tileIndex);
             cancel();
         }
@@ -72,7 +72,7 @@
             { #if !tile.isBuilding && tile.level < building.maxLevel }
             <button
                 on:click={ upgradeBuilding }
-                disabled={ !resources.canPayCost(building.cost[tile.level]) }
+                disabled={ !villageResources.canPayCost(building.cost[tile.level]) }
             >
                 Upgrade to level { tile.level + 1 }
             </button>

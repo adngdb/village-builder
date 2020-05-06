@@ -1,8 +1,7 @@
 <script>
-    import Resources from './Resources.svelte';
+    import screen from './stores/screen';
 
-    export let screen;
-    export let setScreen;
+    import Resources from './Resources.svelte';
 </script>
 
 <style>
@@ -44,14 +43,14 @@
 <menu>
     <ul class="screens">
         <li
-            on:click={ () => setScreen('world') }
-            class:active={ screen === 'world' }
+            on:click={ screen.goToWorld }
+            class:active={ $screen === screen.WORLD }
         >
             <img src="img/world.svg" alt="World Map" />
         </li>
         <li
-            on:click={ () => setScreen('village') }
-            class:active={ screen === 'village' }
+            on:click={ screen.goToVillage }
+            class:active={ $screen === screen.VILLAGE }
         >
             <img src="img/village.svg" alt="Village" />
         </li>

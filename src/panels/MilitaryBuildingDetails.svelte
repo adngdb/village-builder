@@ -2,7 +2,6 @@
     import BUILDINGS from '../data/buildings';
     import SOLDIERS from '../data/soldiers';
 
-    import resources from '../stores/resources';
     import worldMap from '../stores/worldMap';
 
     import BuildingResources from '../BuildingResources.svelte';
@@ -10,19 +9,20 @@
     export let tile;
     export let building;
 
+    $: village = worldMap.getSelectedVillage().map;
+    $: villageResources = worldMap.getSelectedVillage().resources;
+
     let selectedSoldierType = Object.keys(building.recruitment)[0];
     $: selectedSoldier = {
         ...SOLDIERS[selectedSoldierType],
-        canPayCost: resources.canPayCost(SOLDIERS[selectedSoldierType].cost),
+        canPayCost: villageResources.canPayCost(SOLDIERS[selectedSoldierType].cost),
     };
 
     $: maximumUnits = Math.min(...Object.entries(selectedSoldier.cost).map(
-        ([ type, value ]) => Math.floor($resources[type] / value)
+        ([ type, value ]) => Math.floor($villageResources[type] / value)
     ));
 
     $: numberOfUnits = Math.min(1, maximumUnits);
-
-    $: village = worldMap.getSelectedVillage().map;
 
     function setMaximumUnits() {
         numberOfUnits = maximumUnits;
@@ -40,7 +40,7 @@
             turnsToRecruit: selectedSoldier.turnsToRecruit,
         };
         for (let i = 0; i < numberOfUnits; i++) {
-            resources.payCost(selectedSoldier.cost);
+            villageResources.payCost(selectedSoldier.cost);
             village.addToBuildingQueue(tile.index, { ...soldier });
         }
     }

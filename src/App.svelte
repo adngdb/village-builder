@@ -1,17 +1,12 @@
 <script>
     import gameOver from './stores/gameOver';
+    import screen from './stores/screen';
 
     import FightDetails from './FightDetails.svelte';
     import Menu from './Menu.svelte';
     import VillageMap from './VillageMap.svelte';
     import WorldMap from './WorldMap.svelte';
     import YouLost from './YouLost.svelte';
-
-    let screen = 'world';
-
-    function setScreen(newScreen) {
-        screen = newScreen;
-    }
 </script>
 
 <style>
@@ -29,14 +24,11 @@
     <YouLost />
 { :else }
     <main>
-        <Menu
-            { screen }
-            { setScreen }
-        />
+        <Menu />
 
-        { #if screen === 'world' }
-            <WorldMap { setScreen } />
-        { :else }
+        { #if $screen === screen.WORLD }
+            <WorldMap />
+        { :else if $screen === screen.VILLAGE }
             <VillageMap />
         { /if }
 

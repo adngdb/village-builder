@@ -3,10 +3,6 @@ import { get, writable } from 'svelte/store';
 
 const RESOURCES = [
     {
-        key: 'food',
-        name: 'Food',
-    },
-    {
         key: 'wood',
         name: 'Wood',
     },
@@ -22,66 +18,71 @@ const RESOURCES = [
 
 
 const DEFAULT_RESOURCES = {
-    food: 100,
-    wood: 300,
-    stone: 200,
-    iron: 100,
+    wood: 30,
+    stone: 20,
+    iron: 10,
 };
 
 
-const resources = writable(DEFAULT_RESOURCES);
+function create() {
+    const resources = writable(DEFAULT_RESOURCES);
 
 
-function reset() {
-    resources.set(DEFAULT_RESOURCES);
-}
+    function reset() {
+        resources.set(DEFAULT_RESOURCES);
+    }
 
 
-function gain(type, value) {
-    resources.update(res => {
-        return {
-            ...res,
-            [type]: res[type] + value,
-        };
-    });
-}
+    function gain(type, value) {
+        resources.update(res => {
+            return {
+                ...res,
+                [type]: res[type] + value,
+            };
+        });
+    }
 
 
-function lose(type, value) {
-    resources.update(res => {
-        let newValue = res[type] - value;
-        if (newValue < 0) {
-            newValue = 0;
-        }
-        return {
-            ...res,
-            [type]: newValue,
-        };
-    });
-}
+    function lose(type, value) {
+        resources.update(res => {
+            let newValue = res[type] - value;
+            if (newValue < 0) {
+                newValue = 0;
+            }
+            return {
+                ...res,
+                [type]: newValue,
+            };
+        });
+    }
 
 
-function canPayCost(cost) {
-    const res = get(resources);
-    return Object.entries(cost).every(
-        ([ type, value ]) => res[type] >= value
-    );
-}
+    function canPayCost(cost) {
+        const res = get(resources);
+        return Object.entries(cost).every(
+            ([ type, value ]) => res[type] >= value
+        );
+    }
 
 
-function payCost(cost) {
-    return Object.entries(cost).forEach(
-        ([ type, value ]) => lose(type, value)
-    );
+    function payCost(cost) {
+        return Object.entries(cost).forEach(
+            ([ type, value ]) => lose(type, value)
+        );
+    }
+
+    return {
+        subscribe: resources.subscribe,
+        reset,
+        canPayCost,
+        gain,
+        lose,
+        payCost,
+    };
 }
 
 
 export default {
-    subscribe: resources.subscribe,
-    reset,
-    canPayCost,
-    gain,
-    lose,
-    payCost,
+    create,
     RESOURCES,
 };
