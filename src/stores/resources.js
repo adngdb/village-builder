@@ -18,9 +18,9 @@ const RESOURCES = [
 
 
 const DEFAULT_RESOURCES = {
-    wood: 30,
+    wood: 40,
     stone: 20,
-    iron: 10,
+    iron: 20,
 };
 
 

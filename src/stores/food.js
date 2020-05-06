@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store';
 
 
-const DEFAULT_FOOD = 100;
+const DEFAULT_FOOD = 20;
 
 const food = writable(DEFAULT_FOOD);
 
