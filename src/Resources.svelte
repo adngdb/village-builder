@@ -43,25 +43,9 @@
     section {
         height: 100%;
     }
-    .menu {
-        background-color: #ddd;
-        border: 0.1vmin solid #aaa;
-        border-top: none;
-        border-radius: 0 0 1vmin 1vmin;
-    	box-sizing: border-box;
-        height: 100%;
-        padding: 1vmin 0;
-        margin: auto;
-        margin-bottom: 2vmin;
-        width: 90vmin;
-    }
     li {
         display: inline;
         margin: 1vw;
-    }
-    img {
-        height: 1em;
-        width: 1em;
     }
 </style>
 
@@ -69,7 +53,7 @@
     <ul class="menu">
         { #each resources.RESOURCES as res }
         <li>
-            <img src={ `img/${res.key}.svg` } alt={ res.key } title={ res.name } />
+            <img class="icon" src={ `img/${res.key}.svg` } alt={ res.key } title={ res.name } />
             <strong>{ $resources[res.key] }</strong>
             (
             { #if resourcesProd[res.key] === 0 }
