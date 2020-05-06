@@ -12,7 +12,10 @@
 
     export let tileIndex;
 
-    $: tile = $villageMap.flat()[tileIndex];
+    $: tile = {
+        ...$villageMap.flat()[tileIndex],
+        index: tileIndex,
+    };
     $: building = BUILDINGS[tile.building];
 
     const dispatch = createEventDispatcher();

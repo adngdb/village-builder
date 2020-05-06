@@ -3,6 +3,7 @@
     import SOLDIERS from '../data/soldiers';
 
     import resources from '../stores/resources';
+    import villageMap from '../stores/villageMap';
 
     import BuildingResources from '../BuildingResources.svelte';
 
@@ -31,7 +32,16 @@
         };
     }
 
-    function recruit() {}
+    function recruit() {
+        const soldier = {
+            type: selectedSoldierType,
+            turnsToRecruit: selectedSoldier.turnsToRecruit,
+        };
+        for (let i = 0; i < numberOfUnits; i++) {
+            resources.payCost(selectedSoldier.cost);
+            villageMap.addToBuildingQueue(tile.index, { ...soldier });
+        }
+    }
 </script>
 
 <style>

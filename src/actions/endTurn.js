@@ -47,6 +47,12 @@ function eatFood() {
 }
 
 
+function recruitSoldiers() {
+    const soldiers = villageMap.recruit();
+    army.recruit(soldiers);
+}
+
+
 function resolveAttack() {
     if (demons.areAttackingThisTurn()) {
         // Compute army's strength.
@@ -79,7 +85,7 @@ export default function endTurn() {
     produceResources();
     eatFood();
     villageMap.build();
-    // createSoldiers();
+    recruitSoldiers();
     resolveAttack();
     turn.next();
     demons.computeNextStrength();

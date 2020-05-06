@@ -81,10 +81,22 @@ function loseSoldiers(percent) {
 }
 
 
+function recruit(recruits) {
+    army.update(soldiers => {
+        const newArmy = { ...soldiers };
+        recruits.forEach(type => {
+            newArmy[type]++;
+        });
+        return newArmy;
+    });
+}
+
+
 export default {
     ...army,
     reset,
-    starvation,
     belliesFilled,
     loseSoldiers,
+    recruit,
+    starvation,
 };

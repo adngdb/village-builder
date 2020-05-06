@@ -26,7 +26,7 @@ function reset() {
 }
 
 
-const createBuilding = (index, buildingType) => {
+function createBuilding(index, buildingType) {
     internalMap.update(map => {
         if (map[index] === EMPTY_TILE || map[index].building) {
             return map;
@@ -37,13 +37,14 @@ const createBuilding = (index, buildingType) => {
             building: buildingType,
             isBuilding: true,
             turnsToCompletion: 1,
+            queue: [],
         };
         return newMap;
     });
 };
 
 
-const upgradeBuilding = (index) => {
+function upgradeBuilding(index) {
     internalMap.update(map => {
         if (map[index] === EMPTY_TILE || !map[index].building) {
             return map;
@@ -59,7 +60,7 @@ const upgradeBuilding = (index) => {
 };
 
 
-const build = () => {
+function build() {
     internalMap.update(map => {
         return map.map(tile => {
             if (tile === EMPTY_TILE || !tile.isBuilding) {
@@ -77,6 +78,52 @@ const build = () => {
         });
     });
 };
+
+
+function addToBuildingQueue(index, item) {
+    internalMap.update(map => {
+        if (map[index] === EMPTY_TILE || !map[index].building) {
+            return map;
+        }
+        const newMap = [ ...map ];
+        newMap[index] = {
+            ...newMap[index],
+            queue: [ ...newMap[index].queue, item ],
+        };
+        return newMap;
+    });
+}
+
+
+function recruit() {
+    const soldiersToRecruit = [];
+    internalMap.update(map => {
+        return map.map(tile => {
+            if (tile === EMPTY_TILE || !tile.building || !tile.queue.length) {
+                return tile;
+            }
+
+            const queue = [ ...tile.queue ];
+            const nextItem = queue.shift();
+            nextItem.turnsToRecruit--;
+
+            if (nextItem.turnsToRecruit > 0) {
+                queue.unshift(nextItem);
+            }
+            else {
+                soldiersToRecruit.push(nextItem.type);
+            }
+
+            console.debug(queue);
+
+            return {
+                ...tile,
+                queue,
+            };
+        });
+    });
+    return soldiersToRecruit;
+}
 
 
 // The internal map is a flat array. To make it easier to render
@@ -104,8 +151,10 @@ const villageMap = derived(internalMap, ($internalMap) => {
 export default {
     subscribe: villageMap.subscribe,
     reset,
+    addToBuildingQueue,
     build,
     createBuilding,
+    recruit,
     upgradeBuilding,
     EMPTY_TILE,
     MAP_SIZE,
