@@ -119,8 +119,17 @@ strong {
     font-weight: bold;
 }
 
+em {
+    font-style: italic;
+}
+
 section {
     width: 100%;
+}
+
+.icon {
+    height: 1em;
+    width: 1em;
 }
 
 .panel {

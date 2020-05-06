@@ -42,25 +42,48 @@
             villageMap.addToBuildingQueue(tile.index, { ...soldier });
         }
     }
+
+    const soldiersInQueue = {};
+    $: Object.keys(building.recruitment).forEach(recruit => {
+        soldiersInQueue[recruit] = tile.queue.filter(i => i.type === recruit).length;
+    });
 </script>
 
 <style>
     .recruitment .soldier-types {
-        display: flex;
-        justify-content: space-between;
         margin: 2vmin;
     }
 
     .recruitment .soldier-types li {
         border: 3px solid #ccc;
-        border-radius: 0.5vmin;
         cursor: pointer;
         display: inline-block;
         height: 20vmin;
-        line-height: 20vmin;
-        margin: 1vmin;
+        position: relative;
         text-align: center;
         width: 20vmin;
+    }
+
+    .recruitment .soldier-types li + li {
+        margin-left: 1vmin;
+    }
+
+    .recruitment .soldier-types li h3 {
+        line-height: 20vmin;
+        padding: 0;
+    }
+
+    .recruitment .soldier-types li .name {
+        font-weight: bold;
+    }
+
+    .recruitment .soldier-types li .queue {
+        background-color: rgba(128, 128, 128, 0.5);
+        bottom: 0;
+        box-shadow: 0 -2px 1px rgb(128, 128, 128);
+        padding: 1vmin 0;
+        position: absolute;
+        width: 100%;
     }
 
     .recruitment .soldier-types li.active {
@@ -107,7 +130,10 @@
             on:click={ getSelectFn(recruit) }
             class:active={ selectedSoldierType === recruit }
         >
-            { SOLDIERS[recruit].name }
+            <h3 class="name">{ SOLDIERS[recruit].name }</h3>
+            { #if soldiersInQueue[recruit] }
+            <div class="queue">In queue: { soldiersInQueue[recruit] }</div>
+            { /if }
         </li>
         { /each }
     </ul>
@@ -153,6 +179,15 @@
             </button>
         </p>
     </div>
+    <p>
+        { #if tile.queue.length }
+            Currently training: <strong>{ SOLDIERS[tile.queue[0].type].name }</strong>
+            <strong>{ tile.queue[0].turnsToRecruit }</strong>
+            <img class="icon" alt="turns" src="img/turn.svg" />
+        { :else }
+            <em>Queue is empty</em>
+        { /if }
+    </p>
 </div>
 { /if }
 { #if tile.level < building.maxLevel }
