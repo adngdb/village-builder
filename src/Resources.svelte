@@ -13,7 +13,7 @@
     $: village = worldMap.getSelectedVillage().map;
     $: villageResources = worldMap.getSelectedVillage().resources;
 
-    function getResourcesProduction() {
+    function getResourcesProduction($village) {
         const prod = {};
         resources.RESOURCES.forEach(r => {
             prod[r.key] = 0;
@@ -63,7 +63,7 @@
         return prod;
     }
 
-    $: resourcesProd = getResourcesProduction();
+    $: resourcesProd = getResourcesProduction($village);
     $: foodProd = getFoodProduction($army);
 </script>
 
