@@ -1,24 +1,6 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
-
-    import BUILDINGS from './data/buildings';
-    import villageMap from './stores/villageMap';
-
-    export let data = {};
     export let empty = false;
-
-    const dispatch = createEventDispatcher();
-
-    function clickTile() {
-        if (data.building) {
-            // villageMap.upgradeBuilding(data.index);
-            dispatch('upgrade', { tileIndex: data.index });
-        }
-        else {
-            // villageMap.createBuilding(data.index, BUILDINGS.TYPES.FARM);
-            dispatch('create', { tileIndex: data.index });
-        }
-    }
+    export let onTileClick = null;
 </script>
 
 <style>
@@ -74,7 +56,7 @@
     .hexagon.empty:nth-child(even) {
         top: 5.9em;
     }
-    .hexagon > span {
+    .hexagon > div {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -86,8 +68,8 @@
     }
 </style>
 
-<div class="hexagon" class:empty on:click={clickTile}>
-    { #if data.building }
-    <span>{ BUILDINGS[data.building].name } { data.level }</span>
-    { /if }
+<div class="hexagon" class:empty on:click={ onTileClick }>
+    <div>
+        <slot></slot>
+    </div>
 </div>

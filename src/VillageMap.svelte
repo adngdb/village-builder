@@ -1,28 +1,34 @@
 <script>
-	import villageMap from './stores/villageMap';
+    import BUILDINGS from './data/buildings';
 
-	import BuildingDetails from './panels/BuildingDetails.svelte';
-	import CreateBuilding from './panels/CreateBuilding.svelte';
+    import villageMap from './stores/villageMap';
 
-	import HexTile from './HexTile.svelte';
+    import BuildingDetails from './panels/BuildingDetails.svelte';
+    import CreateBuilding from './panels/CreateBuilding.svelte';
 
-	let buildingOnTile = null;
-	let upgradingOnTile = null;
+    import HexTile from './HexTile.svelte';
 
-	function onCancel() {
-		buildingOnTile = null;
-		upgradingOnTile = null;
-	}
+    let createBuildingOnTile = null;
+    let viewBuildingOnTile = null;
 
-	function onCreateBuilding(event) {
-		buildingOnTile = event.detail.tileIndex;
-		upgradingOnTile = null;
-	}
+    function onCancel() {
+        createBuildingOnTile = null;
+        viewBuildingOnTile = null;
+    }
 
-	function onUpgradeBuilding(event) {
-		buildingOnTile = null;
-		upgradingOnTile = event.detail.tileIndex;
-	}
+    function getCreateBuildingFn(tile) {
+        return () => {
+            createBuildingOnTile = tile.index;
+            viewBuildingOnTile = null;
+        }
+    }
+
+    function getBuildingDetailsFn(tile) {
+        return () => {
+            createBuildingOnTile = null;
+            viewBuildingOnTile = tile.index;
+        }
+    }
 </script>
 
 <style>
@@ -37,14 +43,14 @@
 </style>
 
 <section class="village-map">
-    { #if buildingOnTile !== null }
+    { #if createBuildingOnTile !== null }
     <CreateBuilding
-        tileIndex={ buildingOnTile }
+        tileIndex={ createBuildingOnTile }
         on:cancel={ onCancel }
     />
-    { :else if upgradingOnTile !== null }
+    { :else if viewBuildingOnTile !== null }
     <BuildingDetails
-        tileIndex={ upgradingOnTile }
+        tileIndex={ viewBuildingOnTile }
         on:cancel={ onCancel }
     />
     { /if }
@@ -53,13 +59,17 @@
         <div>
             { #each line as tile }
                 { #if tile === villageMap.EMPTY_TILE }
-                    <HexTile empty></HexTile>
+                    <HexTile empty />
+                { :else if tile.building }
+                    <HexTile
+                        onTileClick={ getBuildingDetailsFn(tile) }
+                    >
+                        <span>{ BUILDINGS[tile.building].name } { tile.level }</span>
+                    </HexTile>
                 { :else }
                     <HexTile
-                        data={ tile }
-                        on:create={ onCreateBuilding }
-                        on:upgrade={ onUpgradeBuilding }
-                    ></HexTile>
+                        onTileClick={ getCreateBuildingFn(tile) }
+                    />
                 { /if }
             { /each }
         </div>
