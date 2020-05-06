@@ -6,7 +6,7 @@ const TYPES = {
     SAWMILL: 'buildings/SAWMILL',
     QUARRY: 'buildings/QUARRY',
     MINE: 'buildings/MINE',
-    BARRACK: 'buildings/BARRACK',
+    BARRACKS: 'buildings/BARRACKS',
 };
 
 
@@ -104,14 +104,13 @@ export default {
         },
     },
 
-    [TYPES.BARRACK]: {
+    [TYPES.BARRACKS]: {
         category: CATEGORIES.MILITARY,
-        name: 'Barrack',
+        name: 'Barracks',
         maxLevel: 3,
         recruitment: {
-            1: [ SOLDIERS.TYPES.INFANTRY ],
-            2: [ SOLDIERS.TYPES.INFANTRY ],
-            3: [ SOLDIERS.TYPES.INFANTRY, SOLDIERS.TYPES.VETERAN ],
+            [SOLDIERS.TYPES.INFANTRY]: 1,
+            [SOLDIERS.TYPES.VETERAN]: 3,
         },
         cost: {
             0: { wood: 10, stone: 20 },

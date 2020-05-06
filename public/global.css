@@ -92,6 +92,10 @@ input[type="range"] {
 	height: 0;
 }
 
+img {
+	vertical-align: bottom;
+}
+
 button {
 	color: #333;
 	background-color: #f4f4f4;
@@ -172,3 +176,5 @@ section {
 .panel table .controls {
     text-align: right;
 }
+
+/* TEMP STUFF THERE SHOULD BE NOTHING HERE */

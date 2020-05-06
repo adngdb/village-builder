@@ -2,15 +2,6 @@
     import SOLDIERS from './data/soldiers';
 
     export let recruitment;
-
-    const soldiers = {};
-    Object.entries(recruitment).forEach(([ level, units ]) => {
-        units.forEach(t => {
-            if (!soldiers[t]) {
-                soldiers[t] = level;
-            }
-        });
-    });
 </script>
 
 <style>
@@ -30,7 +21,7 @@
 </style>
 
 <ul>
-    { #each Object.entries(soldiers) as unit }
+    { #each Object.entries(recruitment) as unit }
     <li>{ SOLDIERS[unit[0]].name }&nbsp;(lvl { unit[1] })</li>
     { /each }
 </ul>
