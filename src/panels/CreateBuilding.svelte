@@ -36,7 +36,7 @@
         t => BUILDINGS[t].category === BUILDINGS.CATEGORIES.MILITARY
     );
 
-    $: function getBuildingData(type) {
+    function getBuildingData(type) {
         return {
             ...BUILDINGS[type],
             type,
@@ -44,8 +44,8 @@
         };
     }
 
-    $: production = productionBuildings.map(getBuildingData);
-    $: military = militaryBuildings.map(getBuildingData);
+    $: production = productionBuildings.map(getBuildingData, $resources);
+    $: military = militaryBuildings.map(getBuildingData, $resources);
 </script>
 
 <style>
