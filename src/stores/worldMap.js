@@ -1,4 +1,6 @@
-import { derived, writable } from 'svelte/store';
+import { derived, get, writable } from 'svelte/store';
+
+import villageMap from './villageMap';
 
 
 const DEMONS = 'faction/DEMONS';
@@ -12,7 +14,7 @@ const DEFAULT_TILE = {
 };
 const DEFAULT_VILLAGE = {
     owner: HUMANS,
-    village: null,
+    map: villageMap.create(),
     resources: null,
 };
 
@@ -32,6 +34,11 @@ const internalMap = writable(MAP_STRUCTURE);
 
 function reset() {
     internalMap.set(MAP_STRUCTURE);
+}
+
+
+function getHumanVillages() {
+    return get(internalMap).filter(t => t.owner === HUMANS);
 }
 
 
@@ -57,9 +64,19 @@ const worldMap = derived(internalMap, ($internalMap) => {
 });
 
 
+const selectedVillage = writable(MAP_STRUCTURE.indexOf(DEFAULT_VILLAGE));
+
+
+function getSelectedVillage() {
+    return get(internalMap)[get(selectedVillage)];
+}
+
+
 export default {
     subscribe: worldMap.subscribe,
     reset,
+    getSelectedVillage,
+    getHumanVillages,
     DEMONS,
     HUMANS,
     EMPTY_TILE,

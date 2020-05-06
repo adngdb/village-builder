@@ -4,12 +4,14 @@
     import BUILDINGS from '../data/buildings';
 
     import resources from '../stores/resources';
-    import villageMap from '../stores/villageMap';
+    import worldMap from '../stores/worldMap';
 
     import BuildingResources from '../BuildingResources.svelte';
     import BuildingRecruitment from '../BuildingRecruitment.svelte';
 
     export let tileIndex;
+
+    $: village = worldMap.getSelectedVillage().map;
 
     const dispatch = createEventDispatcher();
 
@@ -22,7 +24,7 @@
             const cost = building.cost[0];
             if (resources.canPayCost(cost)) {
                 resources.payCost(cost);
-                villageMap.createBuilding(tileIndex, building.type);
+                village.createBuilding(tileIndex, building.type);
                 cancel();
             }
         };

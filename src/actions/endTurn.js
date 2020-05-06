@@ -9,21 +9,24 @@ import gameOver from '../stores/gameOver';
 import resources from '../stores/resources';
 import turn from '../stores/turn';
 import villageMap from '../stores/villageMap';
+import worldMap from '../stores/worldMap';
 
 
 function produceResources() {
-    const buildings = get(villageMap).flat()
-        .filter(t => t !== villageMap.EMPTY_TILE)
-        .filter(t => t.building && t.level > 0)
-        .filter(
-            t => BUILDINGS[t.building].category === BUILDINGS.CATEGORIES.PRODUCTION
-        );
+    worldMap.getHumanVillages().forEach(village => {
+        const buildings = get(village.map).flat()
+            .filter(t => t !== villageMap.EMPTY_TILE)
+            .filter(t => t.building && t.level > 0)
+            .filter(
+                t => BUILDINGS[t.building].category === BUILDINGS.CATEGORIES.PRODUCTION
+            );
 
-    buildings.forEach(tile => {
-        const output = BUILDINGS[tile.building].output[tile.level];
-        for (const resource in output) {
-            resources.gain(resource, output[resource]);
-        }
+        buildings.forEach(tile => {
+            const output = BUILDINGS[tile.building].output[tile.level];
+            for (const resource in output) {
+                resources.gain(resource, output[resource]);
+            }
+        });
     });
 }
 
@@ -47,8 +50,18 @@ function eatFood() {
 }
 
 
+function build() {
+    worldMap.getHumanVillages().forEach(village => {
+        village.map.build();
+    });
+}
+
+
 function recruitSoldiers() {
-    const soldiers = villageMap.recruit();
+    let soldiers = [];
+    worldMap.getHumanVillages().forEach(village => {
+        soldiers = soldiers.concat(village.map.recruit());
+    });
     army.recruit(soldiers);
 }
 
@@ -84,7 +97,7 @@ function resolveAttack() {
 export default function endTurn() {
     produceResources();
     eatFood();
-    villageMap.build();
+    build();
     recruitSoldiers();
     resolveAttack();
     turn.next();

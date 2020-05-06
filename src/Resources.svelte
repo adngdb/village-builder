@@ -5,15 +5,18 @@
     import army from './stores/army';
     import resources from './stores/resources';
     import villageMap from './stores/villageMap';
+    import worldMap from './stores/worldMap';
 
-    function getResourcesProduction($army, $villageMap) {
+    $: village = worldMap.getSelectedVillage().map;
+
+    function getResourcesProduction($army) {
         const prod = {};
         resources.RESOURCES.forEach(r => {
             prod[r.key] = 0;
         });
 
         // Buildings production
-        $villageMap.flat()
+        $village.flat()
         .filter(t => t !== villageMap.EMPTY_TILE)
         .filter(t => t.building && t.level > 0)
         .filter(
@@ -36,7 +39,7 @@
         return prod;
     }
 
-    $: resourcesProd = getResourcesProduction($army, $villageMap);
+    $: resourcesProd = getResourcesProduction($army);
 </script>
 
 <style>

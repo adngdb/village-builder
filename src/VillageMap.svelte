@@ -2,6 +2,7 @@
     import BUILDINGS from './data/buildings';
 
     import villageMap from './stores/villageMap';
+    import worldMap from './stores/worldMap';
 
     import BuildingDetails from './panels/BuildingDetails.svelte';
     import CreateBuilding from './panels/CreateBuilding.svelte';
@@ -29,6 +30,8 @@
             viewBuildingOnTile = tile.index;
         }
     }
+
+    $: village = worldMap.getSelectedVillage().map;
 </script>
 
 <style>
@@ -55,7 +58,7 @@
     />
     { /if }
     <div>
-        { #each $villageMap as line }
+        { #each $village as line }
         <div>
             { #each line as tile }
                 { #if tile === villageMap.EMPTY_TILE }

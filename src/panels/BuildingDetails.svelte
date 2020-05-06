@@ -3,7 +3,7 @@
 
     import BUILDINGS from '../data/buildings';
     import resources from '../stores/resources';
-    import villageMap from '../stores/villageMap';
+    import worldMap from '../stores/worldMap';
 
     import BuildingResources from '../BuildingResources.svelte';
 
@@ -12,8 +12,10 @@
 
     export let tileIndex;
 
+    $: village = worldMap.getSelectedVillage().map;
+
     $: tile = {
-        ...$villageMap.flat()[tileIndex],
+        ...$village.flat()[tileIndex],
         index: tileIndex,
     };
     $: building = BUILDINGS[tile.building];
@@ -28,7 +30,7 @@
         const cost = building.cost[tile.level];
         if (resources.canPayCost(cost)) {
             resources.payCost(cost);
-            villageMap.upgradeBuilding(tileIndex);
+            village.upgradeBuilding(tileIndex);
             cancel();
         }
     }

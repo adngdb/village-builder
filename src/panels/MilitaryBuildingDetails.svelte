@@ -3,7 +3,7 @@
     import SOLDIERS from '../data/soldiers';
 
     import resources from '../stores/resources';
-    import villageMap from '../stores/villageMap';
+    import worldMap from '../stores/worldMap';
 
     import BuildingResources from '../BuildingResources.svelte';
 
@@ -22,6 +22,8 @@
 
     $: numberOfUnits = Math.min(1, maximumUnits);
 
+    $: village = worldMap.getSelectedVillage().map;
+
     function setMaximumUnits() {
         numberOfUnits = maximumUnits;
     }
@@ -39,7 +41,7 @@
         };
         for (let i = 0; i < numberOfUnits; i++) {
             resources.payCost(selectedSoldier.cost);
-            villageMap.addToBuildingQueue(tile.index, { ...soldier });
+            village.addToBuildingQueue(tile.index, { ...soldier });
         }
     }
 

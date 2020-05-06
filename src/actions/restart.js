@@ -3,7 +3,7 @@ import demons from '../stores/demons';
 import gameOver from '../stores/gameOver';
 import resources from '../stores/resources';
 import turn from '../stores/turn';
-import villageMap from '../stores/villageMap';
+import worldMap from '../stores/worldMap';
 
 
 export default function restart() {
@@ -12,5 +12,5 @@ export default function restart() {
     gameOver.reset();
     resources.reset();
     turn.reset();
-    villageMap.reset();
+    worldMap.reset();
 }
