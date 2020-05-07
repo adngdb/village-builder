@@ -79,15 +79,12 @@
         background-color: hsl(353, 82%, 56%);
     }
 
-    .camp.attacked,
-    .camp.attacked::before,
-    .camp.attacked::after {
-        box-shadow: 0 0 1vmin hsl(323, 90%, 39%);
+    .camp.attacked {
+        background-color: hsl(25, 100%, 50%);
     }
 
-    .camp.attacked .hexagon {
-        margin: 0;
-        z-index: 200;
+    .camp.attacked:hover {
+        background-color: hsl(25, 80%, 60%);
     }
 
     .village {
@@ -105,15 +102,7 @@
     class:attacked
     on:click={ onTileClick }
 >
-    { #if attacked }
-    <div class={ "hexagon " + type }>
-        <div class="content">
-            <slot></slot>
-        </div>
-    </div>
-    { :else }
     <div class="content">
         <slot></slot>
     </div>
-    { /if }
 </div>
