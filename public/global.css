@@ -158,7 +158,8 @@ section {
 }
 
 .panel h3,
-.panel p {
+.panel p,
+.panel ul {
     margin: 0;
     padding: 1vmin 2vmin;
 }

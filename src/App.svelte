@@ -2,6 +2,7 @@
     import gameOver from './stores/gameOver';
     import screen from './stores/screen';
 
+    import Army from './Army.svelte';
     import FightDetails from './FightDetails.svelte';
     import Menu from './Menu.svelte';
     import VillageMap from './VillageMap.svelte';
@@ -31,6 +32,8 @@
             <WorldMap />
         { :else if $screen === screen.VILLAGE }
             <VillageMap />
+        { :else if $screen === screen.ARMY }
+            <Army />
         { /if }
 
         <FightDetails />

@@ -54,6 +54,12 @@
         >
             <img src="img/village.svg" alt="Village" />
         </li>
+        <li
+            on:click={ screen.goToArmy }
+            class:active={ $screen === screen.ARMY }
+        >
+            <img src="img/army.svg" alt="Army" />
+        </li>
     </ul>
     <Resources />
 </menu>

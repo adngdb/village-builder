@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 
 import SOLDIERS from '../data/soldiers';
 
@@ -18,6 +18,24 @@ let diedOfStarvationLastTurn = 0;
 function reset() {
     army.set(DEFAULT_SOLDIERS);
     diedOfStarvationLastTurn = 0;
+}
+
+
+function getStrength() {
+    const soldiers = get(army);
+    return Object.keys(soldiers).reduce(
+        (s, t) => s + (soldiers[t] * SOLDIERS[t].strength),
+        0
+    );
+}
+
+
+function getFoodIntake() {
+    const soldiers = get(army);
+    return Object.keys(soldiers).reduce(
+        (food, type) => food + (soldiers[type] * SOLDIERS[type].foodIntake),
+        0
+    );
 }
 
 
@@ -96,6 +114,8 @@ export default {
     ...army,
     reset,
     belliesFilled,
+    getFoodIntake,
+    getStrength,
     loseSoldiers,
     recruit,
     starvation,

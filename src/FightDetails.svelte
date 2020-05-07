@@ -10,10 +10,7 @@
     import worldMap from './stores/worldMap';
 
     $: attackingIn = demons.getNextAttackTurn() - $turn;
-    $: armyStrength = Object.keys($army).reduce(
-        (strength, type) => strength + ($army[type] * SOLDIERS[type].strength),
-        0
-    );
+    $: armyStrength = army.getStrength($army);
 </script>
 
 <style>

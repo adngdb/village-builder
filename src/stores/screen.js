@@ -3,6 +3,7 @@ import { writable } from 'svelte/store';
 
 const WORLD = 'screens/WORLD';
 const VILLAGE = 'screens/VILLAGE';
+const ARMY = 'screens/ARMY';
 
 
 const screen = writable(WORLD);
@@ -23,11 +24,18 @@ function goToVillage() {
 }
 
 
+function goToArmy() {
+    screen.set(ARMY);
+}
+
+
 export default {
     subscribe: screen.subscribe,
     reset,
+    goToArmy,
     goToVillage,
     goToWorld,
+    ARMY,
     VILLAGE,
     WORLD,
 };

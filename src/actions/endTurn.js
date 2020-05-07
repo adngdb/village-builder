@@ -38,11 +38,7 @@ function produceResources() {
 
 
 function eatFood() {
-    const soldiers = get(army);
-    const foodToEat = Object.keys(soldiers).reduce(
-        (food, type) => food + (soldiers[type] * SOLDIERS[type].foodIntake),
-        0
-    );
+    const foodToEat = army.getFoodIntake();
 
     if (foodToEat > get(food)) {
         // There's not enough food, some soldiers will die.
@@ -75,11 +71,7 @@ function recruitSoldiers() {
 function waveAttack() {
     if (demons.areAttackingThisTurn()) {
         // Compute army's strength.
-        const soldiers = get(army);
-        const armyStrength = Object.keys(soldiers).reduce(
-            (s, t) => s + (soldiers[t] * SOLDIERS[t].strength),
-            0
-        );
+        const armyStrength = army.getStrength();
         const demonsStrength = get(demons);
 
         if (armyStrength > demonsStrength * 1.2) {
@@ -104,11 +96,7 @@ function campAttack() {
     const camp = get(attackCamp);
 
     // Compute army's strength.
-    const soldiers = get(army);
-    const armyStrength = Object.keys(soldiers).reduce(
-        (s, t) => s + (soldiers[t] * SOLDIERS[t].strength),
-        0
-    );
+    const armyStrength = army.getStrength();
     const campStrength = get(worldMap).flat()[camp].strength;
 
     if (armyStrength < campStrength * 1.1) {
