@@ -1,16 +1,20 @@
 <script>
     export let empty = false;
     export let onTileClick = null;
+
+    export let type = '';
+    export let attacked = false;
 </script>
 
 <style>
     /* Source: https://codepen.io/gpyne/pen/iElhp */
     .hexagon {
-        font-size: 1.2vmin;
-        position: relative;
-        display: inline-block;
-        margin: 0.1em 1.8em;
         background-color: hsl(220, 75%, 75%);
+        cursor: pointer;
+        display: inline-block;
+        font-size: 1.2vmin;
+        margin: 0.1em 1.8em;
+        position: relative;
         text-align: center;
     }
     .hexagon,
@@ -38,12 +42,11 @@
         top: 5.9em;
     }
     .hexagon:hover {
-        background-color: hsla(60, 75%, 75%, 1.0);
-        cursor: pointer;
+        background-color: hsl(60, 75%, 75%);
         z-index: 105;
     }
     .hexagon:active {
-        background-color: hsla(60, 75%, 50%, 1.0);
+        background-color: hsl(60, 75%, 50%);
         z-index: 110;
     }
     .hexagon.empty {
@@ -56,7 +59,7 @@
     .hexagon.empty:nth-child(even) {
         top: 5.9em;
     }
-    .hexagon > div {
+    .hexagon .content {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -66,10 +69,51 @@
         line-height: 1.2;
         z-index: 100;
     }
+
+    /* Game specific styles */
+    .camp {
+        background-color: hsl(353, 90%, 39%);
+    }
+
+    .camp:hover {
+        background-color: hsl(353, 82%, 56%);
+    }
+
+    .camp.attacked,
+    .camp.attacked::before,
+    .camp.attacked::after {
+        box-shadow: 0 0 1vmin hsl(323, 90%, 39%);
+    }
+
+    .camp.attacked .hexagon {
+        margin: 0;
+        z-index: 200;
+    }
+
+    .village {
+        background-color: hsl(173, 90%, 39%);
+    }
+
+    .village:hover {
+        background-color: hsl(173, 90%, 50%);
+    }
 </style>
 
-<div class="hexagon" class:empty on:click={ onTileClick }>
-    <div>
+<div
+    class={ "hexagon " + type }
+    class:empty
+    class:attacked
+    on:click={ onTileClick }
+>
+    { #if attacked }
+    <div class={ "hexagon " + type }>
+        <div class="content">
+            <slot></slot>
+        </div>
+    </div>
+    { :else }
+    <div class="content">
         <slot></slot>
     </div>
+    { /if }
 </div>

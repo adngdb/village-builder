@@ -44,10 +44,13 @@
                     <HexTile empty />
                 { :else if tile.owner === worldMap.DEMONS }
                     <HexTile
+                        type="camp"
+                        attacked={ $attackCamp === tile.index }
                         onTileClick={ getAttackCampFn(tile) }
                     >{ tile.strength }</HexTile>
                 { :else }
                     <HexTile
+                        type="village"
                         onTileClick={ getSelectVillageFn(tile) }
                     >H</HexTile>
                 { /if }
