@@ -13,25 +13,25 @@ const EMPTY_TILE = -1;
 const CAMP_SMALL = {
     owner: DEMONS,
     type: 'small',
-    strength: 4,
+    strength: 40,
 };
 
 const CAMP_MIDDLE = {
     owner: DEMONS,
     type: 'middle',
-    strength: 5,
+    strength: 120,
 };
 
 const CAMP_BIG = {
     owner: DEMONS,
     type: 'big',
-    strength: 6,
+    strength: 600,
 };
 
 const CAMP_BOSS = {
     owner: DEMONS,
     type: 'boss',
-    strength: 2,
+    strength: 2000,
 };
 
 
