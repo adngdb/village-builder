@@ -80,6 +80,11 @@ function getSelectedVillage() {
 }
 
 
+function setSelectedVillageIndex(index) {
+    selectedVillage.set(index);
+}
+
+
 function reset() {
     internalMap.set(createWorld());
     selectedVillage.set(getDefaultVillageIndex());
@@ -91,6 +96,7 @@ export default {
     reset,
     getSelectedVillage,
     getHumanVillages,
+    setSelectedVillageIndex,
     DEMONS,
     HUMANS,
     EMPTY_TILE,

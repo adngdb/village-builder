@@ -6,6 +6,7 @@
 
     function getSelectVillageFn(tile) {
         return () => {
+			worldMap.setSelectedVillageIndex(tile.index);
             screen.goToVillage();
         };
     }
