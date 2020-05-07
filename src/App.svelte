@@ -7,6 +7,7 @@
     import VillageMap from './VillageMap.svelte';
     import WorldMap from './WorldMap.svelte';
     import YouLost from './YouLost.svelte';
+    import YouWin from './YouWin.svelte';
 </script>
 
 <style>
@@ -19,7 +20,7 @@
 </style>
 
 { #if $gameOver === gameOver.VICTORY }
-    <span></span>
+    <YouWin />
 { :else if $gameOver === gameOver.DEFEAT }
     <YouLost />
 { :else }

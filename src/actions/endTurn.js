@@ -116,16 +116,22 @@ function campAttack() {
         gameOver.lose();
     }
     else {
-        // Win, but you're losing troops anyway.
-        // Heh, you get a new village in the deal, don't complain!
-        const combatResult = armyStrength - campStrength
-        const percent = ( armyStrength / combatResult * 5 ) - 5
-        army.loseSoldiers(percent);
+        if (worldMap.getTile(camp).type === 'boss') {
+            // You've beaten the boss! It's glorious victory!
+            gameOver.win();
+        }
+        else {
+            // Win, but you're losing troops anyway.
+            // Heh, you get a new village in the deal, don't complain!
+            const combatResult = armyStrength - campStrength
+            const percent = ( armyStrength / combatResult * 5 ) - 5
+            army.loseSoldiers(percent);
 
-        worldMap.claimVillage(camp);
-        attackCamp.reset();
+            worldMap.claimVillage(camp);
+            attackCamp.reset();
 
-        // TODO: Refresh next wave attack.
+            // TODO: Refresh next wave attack.
+        }
     }
 }
 

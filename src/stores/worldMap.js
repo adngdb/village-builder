@@ -9,9 +9,29 @@ const HUMANS = 'faction/HUMANS';
 
 
 const EMPTY_TILE = -1;
-const DEFAULT_TILE = {
+
+const CAMP_SMALL = {
     owner: DEMONS,
+    type: 'small',
+    strength: 4,
+};
+
+const CAMP_MIDDLE = {
+    owner: DEMONS,
+    type: 'middle',
     strength: 5,
+};
+
+const CAMP_BIG = {
+    owner: DEMONS,
+    type: 'big',
+    strength: 6,
+};
+
+const CAMP_BOSS = {
+    owner: DEMONS,
+    type: 'boss',
+    strength: 2,
 };
 
 
@@ -26,12 +46,13 @@ function humanVillage() {
     };
 }
 
+
 function createWorld() {
     return [
-        EMPTY_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, EMPTY_TILE,
-        DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE,
-        DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE,
-        DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE, DEFAULT_TILE,
+        EMPTY_TILE, CAMP_BIG, CAMP_BIG, CAMP_BIG, EMPTY_TILE,
+        CAMP_MIDDLE, CAMP_BIG, CAMP_BOSS, CAMP_BIG, CAMP_MIDDLE,
+        CAMP_MIDDLE, CAMP_MIDDLE, CAMP_BIG, CAMP_MIDDLE, CAMP_MIDDLE,
+        CAMP_SMALL, CAMP_SMALL, CAMP_MIDDLE, CAMP_SMALL, CAMP_SMALL,
         EMPTY_TILE, EMPTY_TILE, humanVillage(), EMPTY_TILE, EMPTY_TILE,
     ];
 }
@@ -51,6 +72,11 @@ function claimVillage(index) {
         newMap[index] = humanVillage();
         return newMap;
     });
+}
+
+
+function getTile(index) {
+    return get(internalMap)[index];
 }
 
 
@@ -153,6 +179,7 @@ export default {
     claimVillage,
     isAdjacentToHumanVillage,
     getAdjacentTiles,
+    getTile,
     getSelectedVillage,
     getHumanVillages,
     setSelectedVillageIndex,
