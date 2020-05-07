@@ -11,7 +11,7 @@ COPY --from=0 /app/public /usr/share/nginx/html
 # support running as arbitrary user which belongs to the root group
 RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
 
-# users are not allowed to listen on priviliged ports
+# users are not allowed to listen on privileged ports
 RUN sed -i.bak 's/listen\(.*\)80;/listen\18081;/' /etc/nginx/conf.d/default.conf
 EXPOSE 8081
 
