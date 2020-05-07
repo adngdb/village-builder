@@ -54,6 +54,52 @@ function claimVillage(index) {
 }
 
 
+function getAdjacentTiles(index) {
+    const x = Math.floor(index / MAP_SIZE);
+    const y = index - ( x * MAP_SIZE );
+
+    let adjacents;
+    if (y % 2 === 0) {
+        adjacents =  [
+            [ x - 1, y - 1 ],
+            [ x - 1, y ],
+            [ x - 1, y + 1 ],
+            [ x, y - 1 ],
+            [ x + 1, y ],
+            [ x, y + 1 ],
+        ];
+    }
+    else {
+        adjacents =  [
+            [ x, y - 1 ],
+            [ x - 1, y ],
+            [ x, y + 1 ],
+            [ x + 1, y - 1 ],
+            [ x + 1, y ],
+            [ x + 1, y + 1 ],
+        ];
+    }
+
+    return adjacents.map(([ i, j ]) => {
+        if (i < 0 || i >= MAP_SIZE || j < 0 || j >= MAP_SIZE) {
+            return null;
+        }
+        return i * MAP_SIZE + j;
+    }).filter(i => i !== null);
+}
+
+
+function isAdjacentToHumanVillage(index) {
+    const adjacents = getAdjacentTiles(index);
+    const map = get(internalMap);
+    return adjacents.some(
+        i => {
+            return map[i] !== EMPTY_TILE && map[i].owner === HUMANS;
+        }
+    );
+}
+
+
 // The internal map is a flat array. To make it easier to render
 // the map, we split it here so that it's an array of arrays.
 const worldMap = derived(internalMap, ($internalMap) => {
@@ -105,6 +151,8 @@ export default {
     selectedVillage: selectedVillage,
     reset,
     claimVillage,
+    isAdjacentToHumanVillage,
+    getAdjacentTiles,
     getSelectedVillage,
     getHumanVillages,
     setSelectedVillageIndex,

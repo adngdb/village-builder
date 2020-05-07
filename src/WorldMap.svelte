@@ -14,6 +14,10 @@
 
     function getAttackCampFn(tile) {
         return () => {
+            if (!worldMap.isAdjacentToHumanVillage(tile.index)) {
+                return;
+            }
+
             if ($attackCamp === tile.index) {
                 attackCamp.reset();
             }
@@ -22,6 +26,8 @@
             }
         };
     }
+
+    let currentTile = 0;
 </script>
 
 <style>
