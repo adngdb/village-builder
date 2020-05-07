@@ -5,10 +5,10 @@
 
     import army from './stores/army';
     import attackCamp from './stores/attackCamp';
-    import demons from './stores/demons';
+    import wave from './stores/wave';
     import worldMap from './stores/worldMap';
 
-    $: attackingIn = $demons.turnsToNext;
+    $: attackingIn = $wave.turnsToNext;
     $: armyStrength = army.getStrength($army);
 </script>
 
@@ -97,7 +97,7 @@
                 <p class="strength">{ $worldMap.flat()[$attackCamp].strength }</p>
             { :else }
                 <h2>Next Demons Wave</h2>
-                <p class="strength">{ $demons.strength }</p>
+                <p class="strength">{ $wave.strength }</p>
             { /if }
         </div>
     </div>

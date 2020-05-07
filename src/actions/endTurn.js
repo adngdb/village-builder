@@ -5,11 +5,11 @@ import SOLDIERS from '../data/soldiers';
 
 import army from '../stores/army';
 import attackCamp from '../stores/attackCamp';
-import demons from '../stores/demons';
 import food from '../stores/food';
 import gameOver from '../stores/gameOver';
 import turn from '../stores/turn';
 import villageMap from '../stores/villageMap';
+import wave from '../stores/wave';
 import worldMap from '../stores/worldMap';
 
 
@@ -69,10 +69,10 @@ function recruitSoldiers() {
 
 
 function waveAttack() {
-    if (demons.areAttackingThisTurn()) {
+    if (wave.areAttackingThisTurn()) {
         // Compute army's strength.
         const armyStrength = army.getStrength();
-        const demonsStrength = get(demons).strength;
+        const demonsStrength = get(wave).strength;
 
         if (armyStrength > demonsStrength * 1.2) {
             // Glorious victory, no losses.
@@ -119,7 +119,7 @@ function campAttack() {
             attackCamp.reset();
 
             // Refresh next wave attack.
-            demons.startNewWave();
+            wave.startNewWave();
         }
     }
 }
