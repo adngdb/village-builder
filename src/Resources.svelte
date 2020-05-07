@@ -11,7 +11,8 @@
     import worldMap from './stores/worldMap';
 
     $: village = worldMap.getSelectedVillage().map;
-    $: villageResources = worldMap.getSelectedVillage().resources;
+    $: selectedVillage = worldMap.selectedVillage;
+    $: villageResources = worldMap.getSelectedVillage($selectedVillage).resources;
 
     function getResourcesProduction($village) {
         const prod = {};

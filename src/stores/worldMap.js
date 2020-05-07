@@ -45,6 +45,15 @@ function getHumanVillages() {
 }
 
 
+function claimVillage(index) {
+    internalMap.update(map => {
+        const newMap = [ ...map ];
+        newMap[index] = humanVillage();
+        return newMap;
+    });
+}
+
+
 // The internal map is a flat array. To make it easier to render
 // the map, we split it here so that it's an array of arrays.
 const worldMap = derived(internalMap, ($internalMap) => {
@@ -93,7 +102,9 @@ function reset() {
 
 export default {
     subscribe: worldMap.subscribe,
+    selectedVillage: selectedVillage,
     reset,
+    claimVillage,
     getSelectedVillage,
     getHumanVillages,
     setSelectedVillageIndex,

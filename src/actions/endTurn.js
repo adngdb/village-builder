@@ -4,6 +4,7 @@ import BUILDINGS from '../data/buildings';
 import SOLDIERS from '../data/soldiers';
 
 import army from '../stores/army';
+import attackCamp from '../stores/attackCamp';
 import demons from '../stores/demons';
 import food from '../stores/food';
 import gameOver from '../stores/gameOver';
@@ -71,7 +72,7 @@ function recruitSoldiers() {
 }
 
 
-function resolveAttack() {
+function waveAttack() {
     if (demons.areAttackingThisTurn()) {
         // Compute army's strength.
         const soldiers = get(army);
@@ -95,6 +96,46 @@ function resolveAttack() {
             const percent = combatResult / armyStrength * 100;
             army.loseSoldiers(percent);
         }
+    }
+}
+
+
+function campAttack() {
+    const camp = get(attackCamp);
+
+    // Compute army's strength.
+    const soldiers = get(army);
+    const armyStrength = Object.keys(soldiers).reduce(
+        (s, t) => s + (soldiers[t] * SOLDIERS[t].strength),
+        0
+    );
+    const campStrength = get(worldMap).flat()[camp].strength;
+
+    if (armyStrength < campStrength * 1.1) {
+        // Dramatic loss, game over.
+        gameOver.lose();
+    }
+    else {
+        // Win, but you're losing troops anyway.
+        // Heh, you get a new village in the deal, don't complain!
+        const combatResult = armyStrength - campStrength
+        const percent = ( armyStrength / combatResult * 5 ) - 5
+        army.loseSoldiers(percent);
+
+        worldMap.claimVillage(camp);
+        attackCamp.reset();
+
+        // TODO: Refresh next wave attack.
+    }
+}
+
+
+function resolveAttack() {
+    if (get(attackCamp) !== null) {
+        campAttack();
+    }
+    else {
+        waveAttack();
     }
 }
 

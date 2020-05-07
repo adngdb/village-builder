@@ -1,4 +1,5 @@
 <script>
+	import attackCamp from './stores/attackCamp';
 	import screen from './stores/screen';
 	import worldMap from './stores/worldMap';
 
@@ -8,6 +9,17 @@
         return () => {
 			worldMap.setSelectedVillageIndex(tile.index);
             screen.goToVillage();
+        };
+    }
+
+    function getAttackCampFn(tile) {
+        return () => {
+            if ($attackCamp === tile.index) {
+                attackCamp.reset();
+            }
+            else {
+                attackCamp.set(tile.index);
+            }
         };
     }
 </script>
@@ -31,7 +43,9 @@
                 { #if tile === worldMap.EMPTY_TILE }
                     <HexTile empty />
                 { :else if tile.owner === worldMap.DEMONS }
-                    <HexTile>{ tile.strength }</HexTile>
+                    <HexTile
+                        onTileClick={ getAttackCampFn(tile) }
+                    >{ tile.strength }</HexTile>
                 { :else }
                     <HexTile
                         onTileClick={ getSelectVillageFn(tile) }

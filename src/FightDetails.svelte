@@ -1,11 +1,13 @@
 <script>
-	import endTurn from './actions/endTurn';
+    import endTurn from './actions/endTurn';
 
     import SOLDIERS from './data/soldiers';
 
     import army from './stores/army';
+    import attackCamp from './stores/attackCamp';
     import demons from './stores/demons';
     import turn from './stores/turn';
+    import worldMap from './stores/worldMap';
 
     $: attackingIn = demons.getNextAttackTurn() - $turn;
     $: armyStrength = Object.keys($army).reduce(
@@ -54,7 +56,7 @@
 
     .next-turn button {
         background: rgb(255, 186, 33);
-		border: 0.4vmin solid rgb(196, 141, 0);
+        border: 0.4vmin solid rgb(196, 141, 0);
         border-radius: 100%;
         height: 10vh;
         margin: auto;
@@ -70,22 +72,37 @@
         </div>
         <div class="next-turn">
             <p>
-                Next attack
-                <strong>
-                { #if attackingIn === 0 }
-                this turn
-                { :else if attackingIn === 1 }
-                next turn
+                { #if $attackCamp !== null }
+                    Attacking Camp at end of turn
                 { :else }
-                in { attackingIn } turns
+                    Next wave
+                    <strong>
+                    { #if attackingIn === 0 }
+                    this turn
+                    { :else if attackingIn === 1 }
+                    next turn
+                    { :else }
+                    in { attackingIn } turns
+                    { /if }
+                    </strong>
                 { /if }
-                </strong>
             </p>
-            <button on:click={ endTurn }>End Turn</button>
+            <button on:click={ endTurn }>
+                { #if $attackCamp !== null }
+                Attack Camp
+                { :else }
+                End Turn
+                { /if }
+            </button>
         </div>
         <div class="demons-army">
-            <h2>Demons Army</h2>
-            <p class="strength">{ $demons }</p>
+            { #if $attackCamp !== null }
+                <h2>Demon Camp</h2>
+                <p class="strength">{ $worldMap.flat()[$attackCamp].strength }</p>
+            { :else }
+                <h2>Next Demons Wave</h2>
+                <p class="strength">{ $demons }</p>
+            { /if }
         </div>
     </div>
 </section>
