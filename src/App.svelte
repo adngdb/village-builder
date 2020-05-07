@@ -14,7 +14,7 @@
 <style>
     main {
         display: grid;
-        grid-template-rows: 10vh 1fr 15vh;
+        grid-template-rows: 10vh 1fr 13vh;
         height: 100%;
         text-align: center;
     }

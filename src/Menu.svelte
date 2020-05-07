@@ -6,11 +6,12 @@
 
 <style>
     menu {
-        background-color: #ddd;
-        border: 0.1vmin solid #aaa;
+        background-color: hsl(0, 0%, 90%);
+        border: 0.1vmin solid hsl(0, 0%, 40%);
         border-top: none;
         border-radius: 0 0 1vmin 1vmin;
     	box-sizing: border-box;
+        box-shadow: 0 0 1vmin hsl(0, 0%, 90%);
         height: 100%;
         padding: 0;
         margin: auto;

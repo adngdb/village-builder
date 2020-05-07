@@ -16,12 +16,14 @@
     section {
         height: 100%;
     }
+
     .menu {
-        background-color: #ddd;
-        border: 0.1vmin solid #aaa;
+        background-color: hsl(0, 0%, 90%);
+        border: 0.1vmin solid hsl(0, 0%, 40%);
         border-bottom: none;
         border-radius: 1vmin 1vmin 0 0;
     	box-sizing: border-box;
+        box-shadow: 0 0 1vmin hsl(0, 0%, 90%);
         display: grid;
         grid-template-columns: 1fr auto 1fr;
         height: 100%;
@@ -31,16 +33,23 @@
     }
 
     .my-army {
+        background-image: url(../img/humans.svg);
+        background-repeat: no-repeat;
         text-align: left;
     }
 
     .demons-army {
+        background-image: url(../img/demons.svg);
+        background-repeat: no-repeat;
+        background-position: right;
         text-align: right;
     }
 
     .strength {
-        font-size: 6vmin;
-        padding: 2vmin 0;
+        font-size: 4rem;
+        font-weight: bold;
+        padding: 2vmin 4vmin;
+        text-shadow: 0 0 0.5vmin hsl(0, 100%, 100%);
     }
 
     .next-turn {
@@ -63,7 +72,6 @@
 <section>
     <div class="menu">
         <div class="my-army">
-            <h2>My Army</h2>
             <p class="strength">{ armyStrength }</p>
         </div>
         <div class="next-turn">
@@ -93,10 +101,8 @@
         </div>
         <div class="demons-army">
             { #if $attackCamp !== null }
-                <h2>Demon Camp</h2>
                 <p class="strength">{ $worldMap.flat()[$attackCamp].strength }</p>
             { :else }
-                <h2>Next Demons Wave</h2>
                 <p class="strength">{ $wave.strength }</p>
             { /if }
         </div>

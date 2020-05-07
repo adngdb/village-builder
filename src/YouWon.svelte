@@ -6,6 +6,7 @@
     section {
         display: grid;
         height: 100%;
+        text-align: center;
     }
     .content {
         box-sizing: border-box;
@@ -22,6 +23,7 @@
         margin: 5vmin 0;
     }
     p {
+        color: hsl(0, 0%, 90%);
         font-size: 1.4em;
         line-height: 1.4;
         margin: 5vmin 0;

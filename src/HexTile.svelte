@@ -72,11 +72,35 @@
 
     /* Game specific styles */
     .camp {
-        background-color: hsl(353, 90%, 39%);
+        color: hsl(0, 0%, 90%);
     }
 
-    .camp:hover {
-        background-color: hsl(353, 82%, 56%);
+    .camp.small {
+        background-color: hsl(353, 90%, 50%);
+    }
+    .camp.small:hover {
+        background-color: hsl(353, 82%, 60%);
+    }
+
+    .camp.middle {
+        background-color: hsl(353, 90%, 35%);
+    }
+    .camp.middle:hover {
+        background-color: hsl(353, 82%, 55%);
+    }
+
+    .camp.big {
+        background-color: hsl(353, 90%, 25%);
+    }
+    .camp.big:hover {
+        background-color: hsl(353, 82%, 41%);
+    }
+
+    .camp.boss {
+        background-color: hsl(353, 90%, 20%);
+    }
+    .camp.boss:hover {
+        background-color: hsl(353, 82%, 36%);
     }
 
     .camp.attacked {

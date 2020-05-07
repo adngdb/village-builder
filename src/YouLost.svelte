@@ -6,6 +6,7 @@
     section {
         display: grid;
         height: 100%;
+        text-align: center;
     }
     .content {
         box-sizing: border-box;
@@ -17,11 +18,12 @@
         padding: 0 2vmin;
     }
     h1 {
-        color: rgb(162, 34, 34);
+        color: hsl(0, 65%, 38%);
         font-size: 4em;
         margin: 5vmin 0;
     }
     p {
+        color: hsl(0, 0%, 90%);
         font-size: 1.4em;
         line-height: 1.4;
         margin: 5vmin 0;
