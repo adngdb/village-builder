@@ -6,10 +6,9 @@
     import army from './stores/army';
     import attackCamp from './stores/attackCamp';
     import demons from './stores/demons';
-    import turn from './stores/turn';
     import worldMap from './stores/worldMap';
 
-    $: attackingIn = demons.getNextAttackTurn() - $turn;
+    $: attackingIn = $demons.turnsToNext;
     $: armyStrength = army.getStrength($army);
 </script>
 
@@ -98,7 +97,7 @@
                 <p class="strength">{ $worldMap.flat()[$attackCamp].strength }</p>
             { :else }
                 <h2>Next Demons Wave</h2>
-                <p class="strength">{ $demons }</p>
+                <p class="strength">{ $demons.strength }</p>
             { /if }
         </div>
     </div>

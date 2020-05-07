@@ -72,7 +72,7 @@ function waveAttack() {
     if (demons.areAttackingThisTurn()) {
         // Compute army's strength.
         const armyStrength = army.getStrength();
-        const demonsStrength = get(demons);
+        const demonsStrength = get(demons).strength;
 
         if (armyStrength > demonsStrength * 1.2) {
             // Glorious victory, no losses.
@@ -118,7 +118,8 @@ function campAttack() {
             worldMap.claimVillage(camp);
             attackCamp.reset();
 
-            // TODO: Refresh next wave attack.
+            // Refresh next wave attack.
+            demons.startNewWave();
         }
     }
 }
@@ -141,5 +142,4 @@ export default function endTurn() {
     recruitSoldiers();
     resolveAttack();
     turn.next();
-    demons.computeNextStrength();
 }

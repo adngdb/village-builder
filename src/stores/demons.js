@@ -11,34 +11,55 @@ function getStrength(x) {
 }
 
 
-const demons = writable(getStrength(1));
+const DEFAULT_WAVE = {
+    turnsToNext: TURNS_BETWEEN_ATTACKS,
+    strength: getStrength(1),
+};
+
+
+const wave = writable(DEFAULT_WAVE);
 
 
 function reset() {
-    demons.set(getStrength(1));
-}
-
-
-function getNextAttackTurn() {
-    const currentTurn = get(turn);
-    return Math.ceil(currentTurn / TURNS_BETWEEN_ATTACKS) * TURNS_BETWEEN_ATTACKS;
-}
-
-
-function computeNextStrength() {
-    demons.update(d => getStrength(getNextAttackTurn()));
+    wave.set(DEFAULT_WAVE);
 }
 
 
 function areAttackingThisTurn() {
-    return get(turn) === getNextAttackTurn();
+    return get(wave).turnsToNext === 0;
 }
 
 
+function startNewWave() {
+    wave.update(w => {
+        const newWave = { ...w };
+        newWave.turnsToNext = TURNS_BETWEEN_ATTACKS;
+        newWave.strength = getStrength(get(turn) + newWave.turnsToNext);
+        return newWave;
+    });
+}
+
+
+function onTurnChange(newTurn) {
+    wave.update(w => {
+        const newWave = { ...w };
+
+        newWave.turnsToNext = newWave.turnsToNext - 1;
+        if (newWave.turnsToNext < 0) {
+            newWave.turnsToNext = TURNS_BETWEEN_ATTACKS - 1;
+            newWave.strength = getStrength(newTurn + newWave.turnsToNext);
+        }
+
+        return newWave;
+    });
+}
+
+turn.subscribe(onTurnChange);
+
+
 export default {
-    subscribe: demons.subscribe,
+    subscribe: wave.subscribe,
     reset,
     areAttackingThisTurn,
-    computeNextStrength,
-    getNextAttackTurn,
+    startNewWave,
 };
