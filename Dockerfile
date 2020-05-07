@@ -6,8 +6,6 @@ WORKDIR /app
 RUN yarn && yarn build
 
 FROM nginx:stable-alpine
-LABEL author="Benjamin Guillon <bengrunt@gmail.com>"
-
 COPY --from=0 /app/public /usr/share/nginx/html
 
 # support running as arbitrary user which belongs to the root group
