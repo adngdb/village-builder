@@ -3,7 +3,7 @@ import { get, writable } from 'svelte/store';
 import turn from '../stores/turn';
 
 
-const TURNS_BETWEEN_ATTACKS = 3;
+const TURNS_BETWEEN_ATTACKS = 5;
 
 
 function getStrength(x) {
@@ -13,7 +13,7 @@ function getStrength(x) {
 
 const DEFAULT_WAVE = {
     turnsToNext: TURNS_BETWEEN_ATTACKS,
-    strength: getStrength(1),
+    strength: getStrength(TURNS_BETWEEN_ATTACKS),
 };
 
 

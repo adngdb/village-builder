@@ -5,7 +5,6 @@ import SOLDIERS from '../data/soldiers';
 
 const DEFAULT_SOLDIERS = {
     [SOLDIERS.TYPES.INFANTRY]: 5,
-    [SOLDIERS.TYPES.VETERAN]: 1,
 };
 
 
@@ -103,6 +102,9 @@ function recruit(recruits) {
     army.update(soldiers => {
         const newArmy = { ...soldiers };
         recruits.forEach(type => {
+            if (!newArmy[type]) {
+                newArmy[type] = 0;
+            }
             newArmy[type]++;
         });
         return newArmy;

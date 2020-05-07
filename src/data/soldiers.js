@@ -1,5 +1,7 @@
 const TYPES = {
     INFANTRY: 'soldiers/INFANTRY',
+    ARCHER: 'soldiers/ARCHER',
+    HEAVY: 'soldiers/HEAVY',
     VETERAN: 'soldiers/VETERAN',
 };
 
@@ -15,11 +17,27 @@ export default {
         cost: { wood: 5, iron: 5 },
     },
 
-    [TYPES.VETERAN]: {
-        name: 'Veteran',
+    [TYPES.ARCHER]: {
+        name: 'Archer',
         strength: 3,
         foodIntake: 2,
         turnsToRecruit: 2,
-        cost: { wood: 20, iron: 20 },
+        cost: { wood: 10, iron: 10 },
+    },
+
+    [TYPES.HEAVY]: {
+        name: 'Heavy Infantry',
+        strength: 5,
+        foodIntake: 2,
+        turnsToRecruit: 3,
+        cost: { wood: 10, iron: 30 },
+    },
+
+    [TYPES.VETERAN]: {
+        name: 'Veteran',
+        strength: 10,
+        foodIntake: 3,
+        turnsToRecruit: 3,
+        cost: { wood: 40, iron: 40 },
     },
 };
