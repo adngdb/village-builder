@@ -1,5 +1,5 @@
 <script>
-    import SOLDIERS from './data/soldiers';
+    import SOLDIERS from '../data/soldiers';
 
     export let recruitment;
 </script>

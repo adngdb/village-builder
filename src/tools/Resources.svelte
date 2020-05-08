@@ -1,14 +1,14 @@
 <script>
     import { get } from 'svelte/store';
 
-    import BUILDINGS from './data/buildings';
-    import SOLDIERS from './data/soldiers';
+    import BUILDINGS from '../data/buildings';
+    import SOLDIERS from '../data/soldiers';
 
-    import army from './stores/army';
-    import food from './stores/food';
-    import resources from './stores/resources';
-    import villageMap from './stores/villageMap';
-    import worldMap from './stores/worldMap';
+    import army from '../stores/army';
+    import food from '../stores/food';
+    import resources from '../stores/resources';
+    import villageMap from '../stores/villageMap';
+    import worldMap from '../stores/worldMap';
 
     const selectedVillage = worldMap.selectedVillage;
     $: village = worldMap.getTile($selectedVillage);

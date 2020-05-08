@@ -1,7 +1,7 @@
 <script>
     import BUILDINGS from '../data/buildings';
 
-    import BuildingResources from '../BuildingResources.svelte';
+    import BuildingResources from '../tools/BuildingResources.svelte';
 
     export let tile;
     export let building;

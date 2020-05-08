@@ -1,12 +1,12 @@
 <script>
-    import endTurn from './actions/endTurn';
+    import endTurn from '../actions/endTurn';
 
-    import SOLDIERS from './data/soldiers';
+    import SOLDIERS from '../data/soldiers';
 
-    import army from './stores/army';
-    import attackCamp from './stores/attackCamp';
-    import wave from './stores/wave';
-    import worldMap from './stores/worldMap';
+    import army from '../stores/army';
+    import attackCamp from '../stores/attackCamp';
+    import wave from '../stores/wave';
+    import worldMap from '../stores/worldMap';
 
     $: attackingIn = $wave.turnsToNext;
     $: armyStrength = army.getStrength($army);

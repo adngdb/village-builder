@@ -4,7 +4,7 @@
 
     import worldMap from '../stores/worldMap';
 
-    import BuildingResources from '../BuildingResources.svelte';
+    import BuildingResources from '../tools/BuildingResources.svelte';
 
     export let tile;
     export let building;

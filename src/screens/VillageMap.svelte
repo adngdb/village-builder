@@ -1,13 +1,13 @@
 <script>
-    import BUILDINGS from './data/buildings';
+    import BUILDINGS from '../data/buildings';
 
-    import villageMap from './stores/villageMap';
-    import worldMap from './stores/worldMap';
+    import villageMap from '../stores/villageMap';
+    import worldMap from '../stores/worldMap';
 
-    import BuildingDetails from './panels/BuildingDetails.svelte';
-    import CreateBuilding from './panels/CreateBuilding.svelte';
+    import BuildingDetails from '../panels/BuildingDetails.svelte';
+    import CreateBuilding from '../panels/CreateBuilding.svelte';
 
-    import HexTile from './HexTile.svelte';
+    import HexTile from '../tools/HexTile.svelte';
 
     let createBuildingOnTile = null;
     let viewBuildingOnTile = null;

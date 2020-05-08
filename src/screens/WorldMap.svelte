@@ -1,9 +1,9 @@
 <script>
-    import attackCamp from './stores/attackCamp';
-    import screen from './stores/screen';
-    import worldMap from './stores/worldMap';
+    import attackCamp from '../stores/attackCamp';
+    import screen from '../stores/screen';
+    import worldMap from '../stores/worldMap';
 
-    import HexTile from './HexTile.svelte';
+    import HexTile from '../tools/HexTile.svelte';
 
     function getSelectVillageFn(tile) {
         return () => {

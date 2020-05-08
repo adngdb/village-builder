@@ -1,5 +1,5 @@
 <script>
-    import restart from './actions/restart';
+    import restart from '../actions/restart';
 </script>
 
 <style>

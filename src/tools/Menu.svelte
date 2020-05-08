@@ -1,5 +1,5 @@
 <script>
-    import screen from './stores/screen';
+    import screen from '../stores/screen';
 
     import Resources from './Resources.svelte';
 </script>

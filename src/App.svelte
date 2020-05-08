@@ -2,13 +2,14 @@
     import gameOver from './stores/gameOver';
     import screen from './stores/screen';
 
-    import Army from './Army.svelte';
-    import FightDetails from './FightDetails.svelte';
-    import Menu from './Menu.svelte';
-    import VillageMap from './VillageMap.svelte';
-    import WorldMap from './WorldMap.svelte';
-    import YouLost from './YouLost.svelte';
-    import YouWon from './YouWon.svelte';
+    import Army from './screens/Army.svelte';
+    import VillageMap from './screens/VillageMap.svelte';
+    import WorldMap from './screens/WorldMap.svelte';
+    import YouLost from './screens/YouLost.svelte';
+    import YouWon from './screens/YouWon.svelte';
+
+    import FightDetails from './tools/FightDetails.svelte';
+    import Menu from './tools/Menu.svelte';
 </script>
 
 <style>

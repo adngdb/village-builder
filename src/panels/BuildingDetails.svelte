@@ -4,7 +4,7 @@
     import BUILDINGS from '../data/buildings';
     import worldMap from '../stores/worldMap';
 
-    import BuildingResources from '../BuildingResources.svelte';
+    import BuildingResources from '../tools/BuildingResources.svelte';
 
     import MilitaryBuildingDetails from './MilitaryBuildingDetails.svelte';
     import ProductionBuildingDetails from './ProductionBuildingDetails.svelte';

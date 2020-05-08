@@ -1,7 +1,7 @@
 <script>
-    import SOLDIERS from './data/soldiers';
+    import SOLDIERS from '../data/soldiers';
 
-    import army from './stores/army';
+    import army from '../stores/army';
 
     $: soldierTypes = Object.keys($army).reverse();
     $: armyStrength = army.getStrength($army);

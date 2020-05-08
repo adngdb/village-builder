@@ -5,8 +5,8 @@
 
     import worldMap from '../stores/worldMap';
 
-    import BuildingResources from '../BuildingResources.svelte';
-    import BuildingRecruitment from '../BuildingRecruitment.svelte';
+    import BuildingResources from '../tools/BuildingResources.svelte';
+    import BuildingRecruitment from '../tools/BuildingRecruitment.svelte';
 
     export let tileIndex;
 
