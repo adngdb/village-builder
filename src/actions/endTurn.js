@@ -8,6 +8,7 @@ import attackCamp from '../stores/attackCamp';
 import food from '../stores/food';
 import gameOver from '../stores/gameOver';
 import turn from '../stores/turn';
+import screen from '../stores/screen';
 import villageMap from '../stores/villageMap';
 import wave from '../stores/wave';
 import worldMap from '../stores/worldMap';
@@ -120,6 +121,8 @@ function campAttack() {
 
             // Refresh next wave attack.
             wave.startNewWave();
+
+            screen.goToVillage();
         }
     }
 }

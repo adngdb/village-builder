@@ -82,15 +82,6 @@ function getVillagesCount() {
 }
 
 
-function claimVillage(index) {
-    internalMap.update(map => {
-        const newMap = [ ...map ];
-        newMap[index] = humanVillage();
-        return newMap;
-    });
-}
-
-
 function getTile(index) {
     return get(internalMap)[index];
 }
@@ -185,6 +176,16 @@ function setSelectedVillageIndex(index) {
 function reset() {
     internalMap.set(createWorld());
     selectedVillage.set(getDefaultVillageIndex());
+}
+
+
+function claimVillage(index) {
+    internalMap.update(map => {
+        const newMap = [ ...map ];
+        newMap[index] = humanVillage();
+        return newMap;
+    });
+    setSelectedVillageIndex(index);
 }
 
 
