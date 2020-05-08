@@ -7,6 +7,7 @@
     import BuildingDetails from '../panels/BuildingDetails.svelte';
     import CreateBuilding from '../panels/CreateBuilding.svelte';
 
+    import Building from '../tools/Building.svelte';
     import HexTile from '../tools/HexTile.svelte';
 
     let createBuildingOnTile = null;
@@ -68,7 +69,7 @@
                     <HexTile
                         onTileClick={ getBuildingDetailsFn(tile) }
                     >
-                        <span>{ BUILDINGS[tile.building].name } { tile.level }</span>
+                        <Building { tile } />
                     </HexTile>
                 { :else }
                     <HexTile
