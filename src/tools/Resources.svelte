@@ -72,26 +72,43 @@
 </script>
 
 <style>
-    section {
+    .resources-panel {
         display: grid;
         grid-template-columns: auto 1fr auto;
+        padding: 1vmin 0;
         position: relative;
         z-index: 200;
     }
-    div {
+
+    .resources-panel > div {
         margin: auto 2vmin;
     }
-    ul {
-        margin: auto;
+
+    .resources-panel > ul {
+        margin: auto 2vmin;
         text-align: left;
     }
-    li {
+
+    .resources-panel > ul li {
         display: inline;
         margin: 0 1vw;
     }
+
+    .resources-panel .food {
+        text-align: right;
+    }
+
+    @media all and (max-width: 630px) {
+        .resources-panel .resources {
+            grid-row-start: 2;
+            grid-column: 1 / 3;
+            margin-top: 1vmin;
+            width: 100%;
+        }
+    }
 </style>
 
-<section>
+<section class="resources-panel">
     <div>
         <VillageSelector />
     </div>
