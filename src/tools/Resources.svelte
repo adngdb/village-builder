@@ -10,6 +10,8 @@
     import villageMap from '../stores/villageMap';
     import worldMap from '../stores/worldMap';
 
+    import VillageSelector from './VillageSelector.svelte';
+
     const selectedVillage = worldMap.selectedVillage;
     $: village = worldMap.getTile($selectedVillage);
     $: map = worldMap.getSelectedVillage($selectedVillage).map;
@@ -71,41 +73,29 @@
 
 <style>
     section {
-        height: 100%;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        position: relative;
+        z-index: 200;
+    }
+    div {
+        margin: auto 2vmin;
     }
     ul {
+        margin: auto;
         text-align: left;
     }
     li {
         display: inline;
-        margin: 1vw;
-    }
-    .food {
-        float: right;
+        margin: 0 1vw;
     }
 </style>
 
 <section>
-    <ul class="food">
-        <li>
-            <img class="icon" src="../img/world.svg" alt="global" />
-            <img class="icon" src={ `img/food.svg` } alt="food" title="Food" />
-            <strong>{ $food }</strong>
-            (
-            { #if foodProd === 0 }
-                -
-            { :else if foodProd > 0 }
-                +{ foodProd }
-            { :else }
-                { foodProd }
-            { /if }
-            )
-        </li>
-    </ul>
-    <ul>
-        <li>
-            { village.name }
-        </li>
+    <div>
+        <VillageSelector />
+    </div>
+    <ul class="resources">
         { #each resources.RESOURCES as res }
         <li>
             <img class="icon" src={ `img/${res.key}.svg` } alt={ res.key } title={ res.name } />
@@ -122,4 +112,18 @@
         </li>
         { /each }
     </ul>
+    <div class="food">
+        <img class="icon" src="../img/world.svg" alt="global" />
+        <img class="icon" src={ `img/food.svg` } alt="food" title="Food" />
+        <strong>{ $food }</strong>
+        (
+        { #if foodProd === 0 }
+            -
+        { :else if foodProd > 0 }
+            +{ foodProd }
+        { :else }
+            { foodProd }
+        { /if }
+        )
+    </div>
 </section>

@@ -39,12 +39,16 @@ const CAMP_BOSS = {
 const MAP_SIZE = 5;
 
 
-function humanVillage() {
+function humanVillage(order) {
+    if (!order) {
+        order = getVillagesCount();
+    }
     return {
         owner: HUMANS,
         map: villageMap.create(),
         resources: resources.create(),
         name: villageNames.getVillageName(),
+        order,
     };
 }
 
@@ -55,7 +59,7 @@ function createWorld() {
         CAMP_MIDDLE, CAMP_BIG, CAMP_BOSS, CAMP_BIG, CAMP_MIDDLE,
         CAMP_MIDDLE, CAMP_MIDDLE, CAMP_BIG, CAMP_MIDDLE, CAMP_MIDDLE,
         CAMP_SMALL, CAMP_SMALL, CAMP_MIDDLE, CAMP_SMALL, CAMP_SMALL,
-        EMPTY_TILE, EMPTY_TILE, humanVillage(), EMPTY_TILE, EMPTY_TILE,
+        EMPTY_TILE, EMPTY_TILE, humanVillage(1), EMPTY_TILE, EMPTY_TILE,
     ];
 }
 
@@ -64,7 +68,17 @@ const internalMap = writable(createWorld());
 
 
 function getHumanVillages() {
-    return get(internalMap).filter(t => t.owner === HUMANS);
+    return get(internalMap)
+    .map(
+        (tile, index) => { return { ...tile, index }; }
+    )
+    .filter(t => t.owner === HUMANS)
+    .sort((a, b) => a.order - b.order);
+}
+
+
+function getVillagesCount() {
+    return getHumanVillages().length;
 }
 
 
@@ -151,7 +165,7 @@ const worldMap = derived(internalMap, ($internalMap) => {
 
 
 function getDefaultVillageIndex() {
-    return get(internalMap).findIndex(t => t !== EMPTY_TILE && t.owner === HUMANS);
+    return getHumanVillages()[0].index;
 }
 
 

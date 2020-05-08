@@ -31,7 +31,8 @@
         }
     }
 
-    $: village = worldMap.getSelectedVillage().map;
+    const selectedVillage = worldMap.selectedVillage;
+    $: village = worldMap.getSelectedVillage($selectedVillage).map;
 </script>
 
 <style>
