@@ -42,7 +42,16 @@
             { #each soldierTypes as soldier }
             <tr>
                 <td>{ $army[soldier] }</td>
-                <td>{ SOLDIERS[soldier].name }</td>
+                <td>
+                    <img
+                        class="icon"
+                        src={ `img/soldiers/${SOLDIERS[soldier].illus}.svg` }
+                        alt=""
+                    />
+                </td>
+                <td>
+                    { SOLDIERS[soldier].name }
+                </td>
                 <td>
                     { SOLDIERS[soldier].strength }
                     <img class="icon" src="img/strength.svg" alt="strength" />

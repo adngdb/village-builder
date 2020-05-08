@@ -53,14 +53,17 @@
 
 <style>
     .recruitment .soldier-types {
-        margin: 2vmin;
+        display: flex;
+        justify-content: space-between;
     }
 
     .recruitment .soldier-types li {
-        border: 3px solid #ccc;
+        border: 3px solid hsl(0, 0%, 70%);
+        box-sizing: border-box;
         cursor: pointer;
         display: inline-block;
         height: 20vmin;
+        overflow: hidden;
         position: relative;
         text-align: center;
         width: 20vmin;
@@ -71,26 +74,24 @@
         margin: 0 auto;
     }
 
-    .recruitment .soldier-types li + li {
-        margin-left: 1vmin;
-    }
-
     .recruitment .soldier-types li .name {
         font-weight: bold;
     }
 
     .recruitment .soldier-types li .queue,
     .recruitment .soldier-types li .unlock {
-        background-color: rgba(128, 128, 128, 0.5);
+        background-color: hsla(0, 0%, 10%, 0.5);
         bottom: 0;
-        box-shadow: 0 -2px 1px rgb(128, 128, 128);
+        box-shadow: 0 -2px 1px hsla(0, 0%, 10%, 0.6);
+        color: hsl(0, 0%, 90%);
         padding: 1vmin 0;
         position: absolute;
+        text-shadow: 0 0 2px hsl(0, 0%, 10%);
         width: 100%;
     }
 
     .recruitment .soldier-types li.active {
-        background-color: rgb(237, 164, 164);
+        background-color: hsl(105, 75%, 93%);
     }
 
     .recruitment .soldier-types li.locked {
@@ -98,8 +99,11 @@
     }
 
     .recruitment .soldier-types li:not(.active):hover {
-        background-color: rgb(231, 201, 201);
-        border-color: rgb(177, 110, 110);
+        background-color: hsl(105, 75%, 93%);
+    }
+
+    .recruitment .soldier-types li:hover {
+        border-color: hsl(105, 50%, 70%);
     }
 
     .recruitment .caracteristics {
@@ -140,6 +144,12 @@
         >
             <h3 class="name">{ SOLDIERS[recruit].name }</h3>
             <hr />
+            <div class="illustration">
+                <img
+                    src={ `img/soldiers/${SOLDIERS[recruit].illus}.svg` }
+                    alt={ SOLDIERS[recruit].name }
+                />
+            </div>
             { #if tile.level < building.recruitment[recruit] }
             <div class="unlock">Unlock at level { building.recruitment[recruit] }</div>
             { :else if soldiersInQueue[recruit] }

@@ -23,6 +23,7 @@ export default {
     [TYPES.FARM]: {
         category: CATEGORIES.PRODUCTION,
         name: 'Farm',
+        illus: 'farm',
         maxLevel: 10,
         output: {
             1: { food: 10 },
@@ -54,6 +55,7 @@ export default {
     [TYPES.SAWMILL]: {
         category: CATEGORIES.PRODUCTION,
         name: 'Sawmill',
+        illus: 'sawmill',
         maxLevel: 10,
         output: {
             1: { wood: 10 },
@@ -85,6 +87,7 @@ export default {
     [TYPES.QUARRY]: {
         category: CATEGORIES.PRODUCTION,
         name: 'Quarry',
+        illus: 'quarry',
         maxLevel: 10,
         output: {
             1: { stone: 10 },
@@ -116,6 +119,7 @@ export default {
     [TYPES.MINE]: {
         category: CATEGORIES.PRODUCTION,
         name: 'Mine',
+        illus: 'mine',
         maxLevel: 10,
         output: {
             1: { iron: 10 },
@@ -147,6 +151,7 @@ export default {
     [TYPES.BARRACKS]: {
         category: CATEGORIES.MILITARY,
         name: 'Barracks',
+        illus: 'barracks',
         maxLevel: 10,
         recruitment: {
             [SOLDIERS.TYPES.INFANTRY]: 1,

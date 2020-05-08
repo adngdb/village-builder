@@ -11,6 +11,7 @@ export default {
 
     [TYPES.INFANTRY]: {
         name: 'Infantry',
+        illus: 'infantry',
         strength: 1,
         foodIntake: 1,
         turnsToRecruit: 1,
@@ -19,6 +20,7 @@ export default {
 
     [TYPES.ARCHER]: {
         name: 'Archer',
+        illus: 'archer',
         strength: 3,
         foodIntake: 2,
         turnsToRecruit: 2,
@@ -27,6 +29,7 @@ export default {
 
     [TYPES.HEAVY]: {
         name: 'Heavy Infantry',
+        illus: 'heavy',
         strength: 5,
         foodIntake: 2,
         turnsToRecruit: 3,
@@ -35,6 +38,7 @@ export default {
 
     [TYPES.VETERAN]: {
         name: 'Veteran',
+        illus: 'veteran',
         strength: 10,
         foodIntake: 3,
         turnsToRecruit: 3,

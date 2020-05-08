@@ -48,16 +48,16 @@
     <div>
         <img
         class="illustration"
-        src={ `../img/buildings/${building.name.toLowerCase()}.svg` }
+        src={ `img/buildings/${building.illus}.svg` }
         alt="{ building.name }"
         />
     </div>
     <div class="level">
         <strong>{ tile.level }</strong>
         { #if tile.isBuilding }
-        <span><img class="icon" src="../img/upgrade.svg" alt="upgrade" />({ tile.turnsToCompletion }<img class="icon" alt="turns" src="img/turn.svg" />)</span>
+        <span><img class="icon" src="img/upgrade.svg" alt="upgrade" />({ tile.turnsToCompletion }<img class="icon" alt="turns" src="img/turn.svg" />)</span>
         { :else if villageResources.canPayCost(building.cost[tile.level]) }
-        <span><img class="icon can-upgrade" src="../img/upgrade.svg" alt="upgrade" /></span>
+        <span><img class="icon can-upgrade" src="img/upgrade.svg" alt="upgrade" /></span>
         { /if }
     </div>
     { #if building.category === BUILDINGS.CATEGORIES.MILITARY && tile.level }

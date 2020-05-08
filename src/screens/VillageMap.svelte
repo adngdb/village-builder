@@ -40,6 +40,7 @@
     .village-map {
         display: grid;
         height: 100%;
+        position: relative;
     }
 
     .village-map > div {

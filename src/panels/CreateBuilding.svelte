@@ -53,7 +53,7 @@
 <style>
     section {
         display: grid;
-        height: 80vh;
+        height: 100%;
         position: absolute;
         z-index: 200;
     }
