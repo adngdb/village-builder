@@ -10,11 +10,11 @@
     import villageMap from './stores/villageMap';
     import worldMap from './stores/worldMap';
 
-    $: village = worldMap.getSelectedVillage().map;
-    $: selectedVillage = worldMap.selectedVillage;
+    const selectedVillage = worldMap.selectedVillage;
+    $: village = worldMap.getSelectedVillage($selectedVillage).map;
     $: villageResources = worldMap.getSelectedVillage($selectedVillage).resources;
 
-    function getResourcesProduction($village) {
+    function getResourcesProduction() {
         const prod = {};
         resources.RESOURCES.forEach(r => {
             prod[r.key] = 0;
@@ -64,7 +64,7 @@
         return prod;
     }
 
-    $: resourcesProd = getResourcesProduction($village);
+    $: resourcesProd = getResourcesProduction($selectedVillage, $village);
     $: foodProd = getFoodProduction($army);
 </script>
 
