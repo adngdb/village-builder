@@ -2,6 +2,7 @@ import { derived, get, writable } from 'svelte/store';
 
 import resources from './resources';
 import villageMap from './villageMap';
+import villageNames from './villageNames';
 
 
 const DEMONS = 'faction/DEMONS';
@@ -43,6 +44,7 @@ function humanVillage() {
         owner: HUMANS,
         map: villageMap.create(),
         resources: resources.create(),
+        name: villageNames.getVillageName(),
     };
 }
 

@@ -25,7 +25,7 @@
     	box-sizing: border-box;
         box-shadow: 0 0 1vmin hsl(0, 0%, 90%);
         display: grid;
-        grid-template-columns: 1fr auto 1fr;
+        grid-template-columns: 25% 1fr 25%;
         height: 100%;
         margin: auto;
         padding: 1vmin 2vmin;

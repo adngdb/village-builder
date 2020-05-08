@@ -7,7 +7,7 @@
 
     function getSelectVillageFn(tile) {
         return () => {
-    worldMap.setSelectedVillageIndex(tile.index);
+            worldMap.setSelectedVillageIndex(tile.index);
             screen.goToVillage();
         };
     }
@@ -62,6 +62,7 @@
                         type="village"
                         onTileClick={ getSelectVillageFn(tile) }
                     >
+                        <span>{ tile.name }</span>
                     </HexTile>
                 { /if }
             { /each }

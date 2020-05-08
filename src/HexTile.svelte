@@ -83,6 +83,7 @@
         background-image: url(../img/camp.svg);
         background-repeat: no-repeat;
         background-position: center;
+        text-shadow: 0 0 2px hsl(0, 0%, 10%);
     }
 
     .camp.small {
@@ -130,9 +131,12 @@
     }
 
     .village .content {
+        text-shadow: 0 0 1px hsl(0, 0%, 10%);
         background-image: url(../img/village-back.svg);
         background-repeat: no-repeat;
         background-position: center;
+        font-size: 2.5vmin;
+        font-weight: bold;
     }
 </style>
 
