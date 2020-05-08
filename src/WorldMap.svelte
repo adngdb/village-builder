@@ -1,13 +1,13 @@
 <script>
-	import attackCamp from './stores/attackCamp';
-	import screen from './stores/screen';
-	import worldMap from './stores/worldMap';
+    import attackCamp from './stores/attackCamp';
+    import screen from './stores/screen';
+    import worldMap from './stores/worldMap';
 
-	import HexTile from './HexTile.svelte';
+    import HexTile from './HexTile.svelte';
 
     function getSelectVillageFn(tile) {
         return () => {
-			worldMap.setSelectedVillageIndex(tile.index);
+    worldMap.setSelectedVillageIndex(tile.index);
             screen.goToVillage();
         };
     }
@@ -36,7 +36,8 @@
         height: 100%;
     }
 
-    .world-map > div {
+    .world-map > div,
+    span {
         margin: auto;
     }
 </style>
@@ -53,12 +54,15 @@
                         type={ "camp " + tile.type }
                         attacked={ $attackCamp === tile.index }
                         onTileClick={ getAttackCampFn(tile) }
-                    >{ tile.strength }</HexTile>
+                    >
+                        <span>{ tile.strength }</span>
+                    </HexTile>
                 { :else }
                     <HexTile
                         type="village"
                         onTileClick={ getSelectVillageFn(tile) }
-                    >H</HexTile>
+                    >
+                    </HexTile>
                 { /if }
             { /each }
         </div>

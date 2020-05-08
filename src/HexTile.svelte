@@ -61,18 +61,28 @@
     }
     .hexagon .content {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 140%;
+        display: grid;
+        top: 5%;
+        left: -40%;
         font-size: 4vmin;
+        height: 90%;
         line-height: 1.2;
+        width: 180%;
         z-index: 100;
+    }
+    .hexagon .content > * {
+        margin: auto;
     }
 
     /* Game specific styles */
-    .camp {
+    .camp, .village {
         color: hsl(0, 0%, 90%);
+    }
+
+    .camp .content {
+        background-image: url(../img/camp.svg);
+        background-repeat: no-repeat;
+        background-position: center;
     }
 
     .camp.small {
@@ -112,11 +122,17 @@
     }
 
     .village {
-        background-color: hsl(173, 90%, 39%);
+        background-color: hsl(107, 90%, 39%);
     }
 
     .village:hover {
-        background-color: hsl(173, 90%, 50%);
+        background-color: hsl(107, 90%, 50%);
+    }
+
+    .village .content {
+        background-image: url(../img/village-back.svg);
+        background-repeat: no-repeat;
+        background-position: center;
     }
 </style>
 
