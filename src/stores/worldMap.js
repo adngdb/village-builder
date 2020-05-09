@@ -41,7 +41,7 @@ const MAP_SIZE = 5;
 
 function humanVillage(order) {
     if (!order) {
-        order = getVillagesCount();
+        order = getVillagesCount() + 1;
     }
     return {
         owner: HUMANS,

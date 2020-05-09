@@ -6,12 +6,11 @@
     $: villages = worldMap.getHumanVillages($selectedVillage, $worldMap);
 
     function selectVillage(event) {
-        worldMap.setSelectedVillageIndex(event.target.value);
+        worldMap.setSelectedVillageIndex(parseInt(event.target.value));
     }
 
     function selectPrevious() {
-        let previous = villages.findIndex(v => v.index === $selectedVillage);
-        previous--;
+        let previous = villages.findIndex(v => v.index === $selectedVillage) - 1;
         if (previous < 0) {
             previous = villages.length - 1;
         }
@@ -19,8 +18,7 @@
     }
 
     function selectNext() {
-        let next = villages.findIndex(v => v.index === $selectedVillage);
-        next++;
+        let next = villages.findIndex(v => v.index === $selectedVillage) + 1;
         if (next > villages.length - 1) {
             next = 0;
         }
