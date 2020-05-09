@@ -5,6 +5,7 @@
 
     import army from '../stores/army';
     import attackCamp from '../stores/attackCamp';
+    import screen from '../stores/screen';
     import wave from '../stores/wave';
     import worldMap from '../stores/worldMap';
 
@@ -35,6 +36,7 @@
     .my-army {
         background-image: url(../img/humans.svg);
         background-repeat: no-repeat;
+        cursor: pointer;
         text-align: left;
     }
 
@@ -71,7 +73,7 @@
 
 <section>
     <div class="menu">
-        <div class="my-army">
+        <div class="my-army" on:click={ screen.goToArmy }>
             <p class="strength">{ armyStrength }</p>
         </div>
         <div class="next-turn">
