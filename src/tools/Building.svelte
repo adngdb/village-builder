@@ -8,7 +8,8 @@
 
     $: building = BUILDINGS[tile.building];
 
-    const villageResources = worldMap.getSelectedVillage().resources;
+    const selectedVillage = worldMap.selectedVillage;
+    $: villageResources = worldMap.getSelectedVillage($selectedVillage).resources;
 </script>
 
 <style>
