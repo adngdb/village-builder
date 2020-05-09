@@ -191,7 +191,9 @@
                 max={ maximumUnits }
                 bind:value={ numberOfUnits }
             />
-            <button on:click={ setMaximumUnits }>Max</button>
+            <button on:click={ setMaximumUnits }>
+                <img class="icon" src="img/ui/max.svg" alt="" />
+            </button>
             <button
                 on:click={ recruit }
                 disabled={
@@ -213,13 +215,4 @@
         { /if }
     </p>
 </div>
-{ /if }
-{ #if tile.level < building.maxLevel }
-<h3>Next Level ({ tile.level + 1 })</h3>
-<p>
-    Construction cost: <BuildingResources resources={ building.cost[tile.level] } />
-</p>
-<p>
-    Turns to completion: { tile.level + 1 }
-</p>
 { /if }

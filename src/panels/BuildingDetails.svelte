@@ -48,8 +48,10 @@
 <section>
     <div class="panel">
         <h2>
-            <span on:click={ cancel } class="close">X</span>
-            { building.name } (level: { tile.level })
+            <span on:click={ cancel } class="close">
+                <img class="icon" src="img/ui/cancel.svg" alt="" />
+            </span>
+            { building.name } (level { tile.level })
         </h2>
         { #if tile.isBuilding }
         <p>
@@ -68,13 +70,19 @@
         />
         { /if }
         <p class="controls">
-            <button on:click={ cancel }>Close</button>
+            <button on:click={ cancel }>
+                <img class="icon" src="img/ui/cancel.svg" alt="" />
+                Close
+            </button>
             { #if !tile.isBuilding && tile.level < building.maxLevel }
             <button
                 on:click={ upgradeBuilding }
                 disabled={ !villageResources.canPayCost(building.cost[tile.level]) }
             >
-                Upgrade to level { tile.level + 1 }
+                <img class="icon" src="img/upgrade.svg" alt="" />
+                Upgrade -
+                <BuildingResources resources={ building.cost[tile.level] } />
+                { tile.level + 1 }<img class="icon" src="img/turn.svg" alt="turns" />
             </button>
             { /if }
         </p>

@@ -62,7 +62,9 @@
 <section>
     <div class="panel">
         <h2>
-            <span on:click={ cancel } class="close">X</span>
+            <span on:click={ cancel } class="close">
+                <img class="icon" src="img/ui/cancel.svg" alt="" />
+            </span>
             Create a New Building
         </h2>
         <table>
@@ -142,7 +144,10 @@
             </tbody>
         </table>
         <p class="controls">
-            <button on:click={ cancel }>Cancel</button>
+            <button on:click={ cancel }>
+                <img class="icon" src="img/ui/cancel.svg" alt="" />
+                Cancel
+            </button>
         </p>
     </div>
 </section>

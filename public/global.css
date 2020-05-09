@@ -115,6 +115,10 @@ button:focus {
     border-color: #666;
 }
 
+button img {
+    vertical-align: baseline;
+}
+
 strong {
     font-weight: bold;
 }
