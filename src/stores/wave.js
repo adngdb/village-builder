@@ -1,13 +1,15 @@
 import { get, writable } from 'svelte/store';
 
 import turn from '../stores/turn';
+import worldMap from '../stores/worldMap';
 
 
 const TURNS_BETWEEN_ATTACKS = 5;
 
 
 function getStrength(x) {
-    return Math.round(x + Math.cos(x));
+    const y = worldMap.getVillagesCount();
+    return Math.round(x + y * x * x / 100 + Math.cos(x) * x / 100)
 }
 
 
