@@ -130,8 +130,8 @@
         { /each }
     </ul>
     <div class="food">
-        <img class="icon" src="../img/world.svg" alt="global" />
-        <img class="icon" src={ `img/food.svg` } alt="food" title="Food" />
+        <img class="icon" src="img/world.svg" alt="global" />
+        <img class="icon" src="img/food.svg" alt="food" title="Food" />
         <strong>{ $food }</strong>
         (
         { #if foodProd === 0 }
