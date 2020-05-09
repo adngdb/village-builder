@@ -34,7 +34,6 @@ export default {
             0: { wood: 10 },
             1: { wood: 30 },
             2: { wood: 80 },
-            3: { wood: 200 },
         },
     },
 
@@ -52,7 +51,6 @@ export default {
             0: { wood: 10 },
             1: { wood: 30, iron: 10 },
             2: { wood: 50, stone: 40, iron: 20 },
-            3: { wood: 50, stone: 100, iron: 40 },
         },
     },
 
@@ -70,7 +68,6 @@ export default {
             0: { wood: 10 },
             1: { wood: 30 },
             2: { wood: 80 },
-            3: { wood: 200 },
         },
     },
 
@@ -88,7 +85,6 @@ export default {
             0: { wood: 10 },
             1: { wood: 30 },
             2: { wood: 80 },
-            3: { wood: 200 },
         },
     },
 
@@ -114,7 +110,6 @@ export default {
             7: { wood: 200, stone: 350 },
             8: { wood: 280, stone: 500 },
             9: { wood: 400, stone: 700 },
-            10: { wood: 600, stone: 1000 },
         },
     },
 };

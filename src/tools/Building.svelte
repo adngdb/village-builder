@@ -57,7 +57,7 @@
         <strong>{ tile.level }</strong>
         { #if tile.isBuilding }
         <span><img class="icon" src="img/upgrade.svg" alt="upgrade" />({ tile.turnsToCompletion }<img class="icon" alt="turns" src="img/turn.svg" />)</span>
-        { :else if villageResources.canPayCost(building.cost[tile.level]) }
+        { :else if tile.level < building.maxLevel && villageResources.canPayCost(building.cost[tile.level]) }
         <span><img class="icon can-upgrade" src="img/upgrade.svg" alt="upgrade" /></span>
         { /if }
     </div>
