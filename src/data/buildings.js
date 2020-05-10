@@ -28,6 +28,7 @@ export default {
         name: 'Farm',
         illus: 'farm',
         maxLevel: 3,
+        requiredVillageCount: 1,
         output: {
             1: { food: 5 },
             2: { food: 10 },
@@ -45,6 +46,7 @@ export default {
         name: 'Sawmill',
         illus: 'sawmill',
         maxLevel: 3,
+        requiredVillageCount: 1,
         output: {
             1: { wood: 5 },
             2: { wood: 10 },
@@ -62,6 +64,7 @@ export default {
         name: 'Quarry',
         illus: 'quarry',
         maxLevel: 3,
+        requiredVillageCount: 1,
         output: {
             1: { stone: 5 },
             2: { stone: 10 },
@@ -79,6 +82,7 @@ export default {
         name: 'Iron Mine',
         illus: 'iron-mine',
         maxLevel: 3,
+        requiredVillageCount: 1,
         output: {
             1: { iron: 5 },
             2: { iron: 10 },
@@ -96,6 +100,7 @@ export default {
         name: 'Hunting Cabin',
         illus: 'hunting-cabin',
         maxLevel: 3,
+        requiredVillageCount: 2,
         output: {
             1: { leather: 5, food: 5 },
             2: { leather: 10, food: 10 },
@@ -113,6 +118,7 @@ export default {
         name: 'Gemstone Mine',
         illus: 'gemstone-mine',
         maxLevel: 3,
+        requiredVillageCount: 2,
         output: {
             1: { gemstone: 2 },
             2: { gemstone: 5 },
@@ -130,6 +136,7 @@ export default {
         name: 'Barracks',
         illus: 'barracks',
         maxLevel: 10,
+        requiredVillageCount: 1,
         recruitment: {
             [SOLDIERS.TYPES.INFANTRY]: 1,
             [SOLDIERS.TYPES.ARCHER]: 3,
@@ -155,6 +162,7 @@ export default {
         name: 'Stable',
         illus: 'stable',
         maxLevel: 10,
+        requiredVillageCount: 2,
         recruitment: {
             [SOLDIERS.TYPES.CAVALRY]: 1,
             [SOLDIERS.TYPES.CHARIOT]: 3,

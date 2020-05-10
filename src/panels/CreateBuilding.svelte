@@ -28,14 +28,6 @@
         };
     }
 
-    const buildingTypes = Object.values(BUILDINGS.TYPES);
-    const productionBuildings = buildingTypes.filter(
-        t => BUILDINGS[t].category === BUILDINGS.CATEGORIES.PRODUCTION
-    );
-    const militaryBuildings = buildingTypes.filter(
-        t => BUILDINGS[t].category === BUILDINGS.CATEGORIES.MILITARY
-    );
-
     function getBuildingData(type) {
         return {
             ...BUILDINGS[type],
@@ -43,6 +35,25 @@
             canPayCost: villageResources.canPayCost(BUILDINGS[type].cost[0]),
         };
     }
+
+    const buildingTypes = Object.values(BUILDINGS.TYPES);
+    function getBuildingsOfType(type, numberOfVillages) {
+        return buildingTypes
+        .filter(t => BUILDINGS[t].category === type)
+        .filter(t => BUILDINGS[t].requiredVillageCount <= numberOfVillages)
+        ;
+    }
+
+    $: villageCount = worldMap.getVillagesCount($worldMap);
+
+    $: productionBuildings = getBuildingsOfType(
+        BUILDINGS.CATEGORIES.PRODUCTION,
+        villageCount,
+    );
+    $: militaryBuildings = getBuildingsOfType(
+        BUILDINGS.CATEGORIES.MILITARY,
+        villageCount,
+    );
 
     $: production = productionBuildings.map(getBuildingData, $villageResources);
     $: military = militaryBuildings.map(getBuildingData, $villageResources);
