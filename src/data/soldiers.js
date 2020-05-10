@@ -3,6 +3,10 @@ const TYPES = {
     ARCHER: 'soldiers/ARCHER',
     HEAVY: 'soldiers/HEAVY',
     VETERAN: 'soldiers/VETERAN',
+    CAVALRY: 'soldiers/CAVALRY',
+    CHARIOT: 'soldiers/CHARIOT',
+    KNIGHT: 'soldiers/KNIGHT',
+    CENTAUR: 'soldiers/CENTAUR',
 };
 
 
@@ -43,5 +47,41 @@ export default {
         foodIntake: 3,
         turnsToRecruit: 3,
         cost: { wood: 40, iron: 40 },
+    },
+
+    [TYPES.CAVALRY]: {
+        name: 'Cavalry',
+        illus: 'cavalry',
+        strength: 2,
+        foodIntake: 2,
+        turnsToRecruit: 1,
+        cost: { iron: 10, leather: 10 },
+    },
+
+    [TYPES.CHARIOT]: {
+        name: 'Chariot',
+        illus: 'chariot',
+        strength: 5,
+        foodIntake: 2,
+        turnsToRecruit: 2,
+        cost: { wood: 25, iron: 10, leather: 5 },
+    },
+
+    [TYPES.KNIGHT]: {
+        name: 'Knight',
+        illus: 'knight',
+        strength: 5,
+        foodIntake: 2,
+        turnsToRecruit: 3,
+        cost: { iron: 40, leather: 30 },
+    },
+
+    [TYPES.CENTAUR]: {
+        name: 'Centaur',
+        illus: 'centaur',
+        strength: 8,
+        foodIntake: 1,
+        turnsToRecruit: 2,
+        cost: { wood: 10, iron: 40, gemstone: 15 },
     },
 };

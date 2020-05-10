@@ -5,8 +5,11 @@ const TYPES = {
     FARM: 'buildings/FARM',
     SAWMILL: 'buildings/SAWMILL',
     QUARRY: 'buildings/QUARRY',
-    MINE: 'buildings/MINE',
+    IRON_MINE: 'buildings/IRON_MINE',
     BARRACKS: 'buildings/BARRACKS',
+    HUNTING_CABIN: 'buildings/HUNTING_CABIN',
+    GEMSTONE_MINE: 'buildings/GEMSTONE_MINE',
+    STABLE: 'buildings/STABLE',
 };
 
 
@@ -71,10 +74,10 @@ export default {
         },
     },
 
-    [TYPES.MINE]: {
+    [TYPES.IRON_MINE]: {
         category: CATEGORIES.PRODUCTION,
-        name: 'Mine',
-        illus: 'mine',
+        name: 'Iron Mine',
+        illus: 'iron-mine',
         maxLevel: 3,
         output: {
             1: { iron: 5 },
@@ -88,6 +91,40 @@ export default {
         },
     },
 
+    [TYPES.HUNTING_CABIN]: {
+        category: CATEGORIES.PRODUCTION,
+        name: 'Hunting Cabin',
+        illus: 'hunting-cabin',
+        maxLevel: 3,
+        output: {
+            1: { leather: 5, food: 5 },
+            2: { leather: 10, food: 10 },
+            3: { leather: 20, food: 20 },
+        },
+        cost: {
+            0: { wood: 10, stone: 10, iron: 5 },
+            1: { wood: 30, stone: 30, iron: 15 },
+            2: { wood: 60, stone: 80, iron: 40 },
+        },
+    },
+
+    [TYPES.GEMSTONE_MINE]: {
+        category: CATEGORIES.PRODUCTION,
+        name: 'Gemstone Mine',
+        illus: 'gemstone-mine',
+        maxLevel: 3,
+        output: {
+            1: { gemstone: 2 },
+            2: { gemstone: 5 },
+            3: { gemstone: 10 },
+        },
+        cost: {
+            0: { wood: 10, stone: 5, iron: 10 },
+            1: { wood: 30, stone: 15, iron: 30 },
+            2: { wood: 60, stone: 40, iron: 80 },
+        },
+    },
+
     [TYPES.BARRACKS]: {
         category: CATEGORIES.MILITARY,
         name: 'Barracks',
@@ -98,6 +135,31 @@ export default {
             [SOLDIERS.TYPES.ARCHER]: 3,
             [SOLDIERS.TYPES.HEAVY]: 6,
             [SOLDIERS.TYPES.VETERAN]: 10,
+        },
+        cost: {
+            0: { wood: 10, stone: 20 },
+            1: { wood: 15, stone: 30 },
+            2: { wood: 25, stone: 50 },
+            3: { wood: 40, stone: 80 },
+            4: { wood: 60, stone: 120 },
+            5: { wood: 110, stone: 180 },
+            6: { wood: 140, stone: 250 },
+            7: { wood: 200, stone: 350 },
+            8: { wood: 280, stone: 500 },
+            9: { wood: 400, stone: 700 },
+        },
+    },
+
+    [TYPES.STABLE]: {
+        category: CATEGORIES.MILITARY,
+        name: 'Stable',
+        illus: 'stable',
+        maxLevel: 10,
+        recruitment: {
+            [SOLDIERS.TYPES.CAVALRY]: 1,
+            [SOLDIERS.TYPES.CHARIOT]: 3,
+            [SOLDIERS.TYPES.KNIGHT]: 6,
+            [SOLDIERS.TYPES.CENTAUR]: 10,
         },
         cost: {
             0: { wood: 10, stone: 20 },

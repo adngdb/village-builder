@@ -11,8 +11,6 @@
     let losses;
     $: if ($report && $report.losses) {
         const types = Object.keys($report.losses);
-        console.debug($report.losses);
-        console.debug(types);
         losses = types.map((type, i) => {
             let content = `${$report.losses[type]} ${SOLDIERS[type].name}`;
             if (i === types.length - 2) {
@@ -21,7 +19,6 @@
             else if (i < types.length - 2) {
                 content += ', ';
             }
-            console.debug(content);
             return content;
         }).join('');
     }

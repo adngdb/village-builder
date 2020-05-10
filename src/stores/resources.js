@@ -14,6 +14,14 @@ const RESOURCES = [
         key: 'iron',
         name: 'Iron',
     },
+    {
+        key: 'leather',
+        name: 'Leather',
+    },
+    {
+        key: 'gemstone',
+        name: 'Gemstone',
+    },
 ];
 
 
@@ -21,6 +29,8 @@ const DEFAULT_RESOURCES = {
     wood: 40,
     stone: 20,
     iron: 20,
+    leather: 0,
+    gemstone: 0,
 };
 
 
