@@ -1,6 +1,9 @@
 <script>
     import gameOver from './stores/gameOver';
+    import report from './stores/report';
     import screen from './stores/screen';
+
+    import CombatReport from './panels/CombatReport.svelte';
 
     import Army from './screens/Army.svelte';
     import VillageMap from './screens/VillageMap.svelte';
@@ -28,6 +31,7 @@
 { :else }
     <main>
         <Menu />
+        <CombatReport />
 
         { #if $screen === screen.WORLD }
             <WorldMap />

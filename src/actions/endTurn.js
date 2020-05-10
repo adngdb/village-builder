@@ -8,6 +8,7 @@ import attackCamp from '../stores/attackCamp';
 import food from '../stores/food';
 import gameOver from '../stores/gameOver';
 import turn from '../stores/turn';
+import report from '../stores/report';
 import screen from '../stores/screen';
 import villageMap from '../stores/villageMap';
 import wave from '../stores/wave';
@@ -75,19 +76,21 @@ function waveAttack() {
         const armyStrength = army.getStrength();
         const demonsStrength = get(wave).strength;
 
-        if (armyStrength > demonsStrength * 1.2) {
-            // Glorious victory, no losses.
-            console.debug('glory!');
-        }
-        else if (armyStrength < demonsStrength * 0.8) {
+        if (armyStrength < demonsStrength * 0.8) {
             // Dramatic loss, game over.
             gameOver.lose();
         }
         else {
-            // Draw, your army takes some losses.
-            const combatResult = ( demonsStrength * 1.2 ) - armyStrength;
-            const percent = combatResult / armyStrength * 100;
-            army.loseSoldiers(percent);
+            let soldiersLost = null;
+
+            if (armyStrength <= demonsStrength * 1.2) {
+                // Draw, your army takes some losses.
+                const combatResult = ( demonsStrength * 1.2 ) - armyStrength;
+                const percent = combatResult / armyStrength * 100;
+                soldiersLost = army.loseSoldiers(percent);
+            }
+
+            report.createReport('wave', soldiersLost, null);
         }
     }
 }
@@ -114,10 +117,12 @@ function campAttack() {
             // Heh, you get a new village in the deal, don't complain!
             const combatResult = armyStrength - campStrength
             const percent = ( armyStrength / combatResult * 5 ) - 5
-            army.loseSoldiers(percent);
+            const soldiersLost = army.loseSoldiers(percent);
 
             worldMap.claimVillage(camp);
             attackCamp.reset();
+
+            report.createReport('camp', soldiersLost, camp);
 
             // Refresh next wave attack.
             wave.startNewWave();

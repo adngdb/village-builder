@@ -76,6 +76,7 @@ function belliesFilled() {
 
 
 function loseSoldiers(percent) {
+    let lost = {};
     army.update(soldiers => {
         const totalSoldiers = Object.keys(soldiers).reduce(
             (count, type) => count + soldiers[type],
@@ -91,10 +92,17 @@ function loseSoldiers(percent) {
             const type = getRandomNonZeroSoldierType(newArmy);
             // Kill one of those.
             newArmy[type]--;
+
+            if (!lost[type]) {
+                lost[type] = 0;
+            }
+            lost[type]++;
         }
 
         return newArmy;
     });
+
+    return lost;
 }
 
 

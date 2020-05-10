@@ -27,8 +27,8 @@
     }
 </style>
 
-<section>
-    <div class="panel">
+<section on:click={ cancel }>
+    <div class="panel" on:click|stopPropagation={ () => {} }>
         <h2>
             <span on:click={ cancel } class="close">
                 <img class="icon" src="img/ui/cancel.svg" alt="" />
