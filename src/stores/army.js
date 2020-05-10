@@ -4,7 +4,7 @@ import SOLDIERS from '../data/soldiers';
 
 
 const DEFAULT_SOLDIERS = {
-    [SOLDIERS.TYPES.INFANTRY]: 8,
+    [SOLDIERS.TYPES.INFANTRY]: 80,
 };
 
 
