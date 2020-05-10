@@ -8,6 +8,8 @@
     import BuildingResources from '../tools/BuildingResources.svelte';
     import BuildingRecruitment from '../tools/BuildingRecruitment.svelte';
 
+    import Panel from './Panel.svelte';
+
     export let tileIndex;
 
     $: village = worldMap.getSelectedVillage().map;
@@ -15,17 +17,13 @@
 
     const dispatch = createEventDispatcher();
 
-    function cancel() {
-        dispatch('cancel');
-    }
-
     function getBuildFn(building) {
         return () => {
             const cost = building.cost[0];
             if (villageResources.canPayCost(cost)) {
                 villageResources.payCost(cost);
                 village.createBuilding(tileIndex, building.type);
-                cancel();
+                dispatch('cancel');
             }
         };
     }
@@ -50,104 +48,82 @@
     $: military = militaryBuildings.map(getBuildingData, $villageResources);
 </script>
 
-<style>
-    section {
-        display: grid;
-        height: 100%;
-        position: absolute;
-        z-index: 200;
-    }
-</style>
-
-<section>
-    <div class="panel">
-        <h2>
-            <span on:click={ cancel } class="close">
-                <img class="icon" src="img/ui/cancel.svg" alt="" />
-            </span>
-            Create a New Building
-        </h2>
-        <table>
-            <caption>
-                Production Buildings
-            </caption>
-            <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Cost</td>
-                    <td>Production per Turn</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                { #each production as building }
-                <tr>
-                    <td>{ building.name }</td>
-                    <td>
-                        <BuildingResources
-                            resources={ building.cost[0] }
-                        />
-                    </td>
-                    <td>
-                        <BuildingResources
-                            resources={ building.output[1] }
-                        />
-                    </td>
-                    <td class="controls">
-                        <button
-                            on:click={ getBuildFn(building) }
-                            disabled={ !building.canPayCost }
-                        >
-                            Build
-                        </button>
-                    </td>
-                </tr>
-                { /each }
-            </tbody>
-        </table>
-        <table>
-            <caption>
-                Military Buildings
-            </caption>
-            <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Cost</td>
-                    <td>Recruits</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                { #each military as building }
-                <tr>
-                    <td>{ building.name }</td>
-                    <td>
-                        <BuildingResources
-                            resources={ building.cost[0] }
-                        />
-                    </td>
-                    <td>
-                        <BuildingRecruitment
-                            recruitment={ building.recruitment }
-                        />
-                    </td>
-                    <td class="controls">
-                        <button
-                            on:click={ getBuildFn(building) }
-                            disabled={ !building.canPayCost }
-                        >
-                            Build
-                        </button>
-                    </td>
-                </tr>
-                { /each }
-            </tbody>
-        </table>
-        <p class="controls">
-            <button on:click={ cancel }>
-                <img class="icon" src="img/ui/cancel.svg" alt="" />
-                Cancel
-            </button>
-        </p>
-    </div>
-</section>
+<Panel on:cancel>
+    <span slot="title">Create a New Building</span>
+    <table>
+        <caption>
+            Production Buildings
+        </caption>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Cost</td>
+                <td>Production per Turn</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            { #each production as building }
+            <tr>
+                <td>{ building.name }</td>
+                <td>
+                    <BuildingResources
+                        resources={ building.cost[0] }
+                    />
+                </td>
+                <td>
+                    <BuildingResources
+                        resources={ building.output[1] }
+                    />
+                </td>
+                <td class="controls">
+                    <button
+                        on:click={ getBuildFn(building) }
+                        disabled={ !building.canPayCost }
+                    >
+                        Build
+                    </button>
+                </td>
+            </tr>
+            { /each }
+        </tbody>
+    </table>
+    <table>
+        <caption>
+            Military Buildings
+        </caption>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Cost</td>
+                <td>Recruits</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            { #each military as building }
+            <tr>
+                <td>{ building.name }</td>
+                <td>
+                    <BuildingResources
+                        resources={ building.cost[0] }
+                    />
+                </td>
+                <td>
+                    <BuildingRecruitment
+                        recruitment={ building.recruitment }
+                    />
+                </td>
+                <td class="controls">
+                    <button
+                        on:click={ getBuildFn(building) }
+                        disabled={ !building.canPayCost }
+                    >
+                        Build
+                    </button>
+                </td>
+            </tr>
+            { /each }
+        </tbody>
+    </table>
+</Panel>

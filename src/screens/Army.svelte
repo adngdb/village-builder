@@ -12,6 +12,7 @@
     section {
         display: grid;
     }
+
     .stats {
         display: grid;
         grid-template-columns: 50% 50%;
@@ -19,6 +20,7 @@
         margin: 2vmin;
         text-align: center;
     }
+
     td {
         padding: 1vmin 0;
     }

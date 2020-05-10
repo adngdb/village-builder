@@ -137,10 +137,10 @@ section {
 }
 
 .panel {
-    background-color: white;
+    background-color: hsl(0, 0%, 90%);
     border-radius: 1vmin;
     box-sizing: border-box;
-    box-shadow: 0 0 1vmin hsl(0, 0%, 0%);
+    box-shadow: 0 0 1vmin hsl(0, 0%, 10%);
     margin: auto;
     text-align: left;
     width: 90vmin;
@@ -155,21 +155,11 @@ section {
     text-align: center;
 }
 
-.panel h2 .close {
-    cursor: pointer;
-    float: right;
-    margin-right: 1vmin;
-}
-
 .panel h3,
 .panel p,
 .panel ul {
     margin: 0;
     padding: 1vmin 2vmin;
-}
-
-.panel .controls {
-    text-align: center;
 }
 
 .panel table {
