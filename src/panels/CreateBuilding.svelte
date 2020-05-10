@@ -48,6 +48,14 @@
     $: military = militaryBuildings.map(getBuildingData, $villageResources);
 </script>
 
+<style>
+    @media all and (max-width: 600px) {
+        table td.name {
+            display: none;
+        }
+    }
+</style>
+
 <Panel on:cancel>
     <span slot="title">Create a New Building</span>
     <table>
@@ -56,7 +64,8 @@
         </caption>
         <thead>
             <tr>
-                <td>Name</td>
+                <td></td>
+                <td class="name">Name</td>
                 <td>Cost</td>
                 <td>Production per Turn</td>
                 <td></td>
@@ -65,7 +74,14 @@
         <tbody>
             { #each production as building }
             <tr>
-                <td>{ building.name }</td>
+                <td>
+                    <img
+                        class="icon"
+                        src={ `img/buildings/${building.illus}.svg` }
+                        alt=""
+                    />
+                </td>
+                <td class="name">{ building.name }</td>
                 <td>
                     <BuildingResources
                         resources={ building.cost[0] }
@@ -94,7 +110,8 @@
         </caption>
         <thead>
             <tr>
-                <td>Name</td>
+                <td></td>
+                <td class="name">Name</td>
                 <td>Cost</td>
                 <td>Recruits</td>
                 <td></td>
@@ -103,7 +120,14 @@
         <tbody>
             { #each military as building }
             <tr>
-                <td>{ building.name }</td>
+                <td>
+                    <img
+                        class="icon"
+                        src={ `img/buildings/${building.illus}.svg` }
+                        alt=""
+                    />
+                </td>
+                <td class="name">{ building.name }</td>
                 <td>
                     <BuildingResources
                         resources={ building.cost[0] }

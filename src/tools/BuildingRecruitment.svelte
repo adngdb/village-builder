@@ -5,7 +5,11 @@
 </script>
 
 <style>
-    ul, li {
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+    li {
         display: inline;
         list-style: none;
         margin: 0;
@@ -22,6 +26,9 @@
 
 <ul>
     { #each Object.entries(recruitment) as unit }
-    <li>{ SOLDIERS[unit[0]].name }&nbsp;(lvl { unit[1] })</li>
+    <li>
+        <img class="icon" src={ `img/soldiers/${SOLDIERS[unit[0]].illus}.svg` } alt="" />
+        (lvl { unit[1] })
+    </li>
     { /each }
 </ul>

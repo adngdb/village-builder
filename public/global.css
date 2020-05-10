@@ -177,6 +177,10 @@ section {
     font-weight: bold;
 }
 
+.panel table td {
+    padding: 0.5vmin 0;
+}
+
 .panel table .controls {
     text-align: right;
 }

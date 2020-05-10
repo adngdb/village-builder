@@ -70,7 +70,7 @@ export default {
     [TYPES.KNIGHT]: {
         name: 'Knight',
         illus: 'knight',
-        strength: 5,
+        strength: 8,
         foodIntake: 2,
         turnsToRecruit: 3,
         cost: { iron: 40, leather: 30 },
