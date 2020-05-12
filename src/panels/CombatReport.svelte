@@ -9,7 +9,7 @@
     import Panel from './Panel.svelte';
 
     let losses;
-    $: if ($report && $report.losses) {
+    $: if ($report && $report.losses && Object.keys($report.losses).length) {
         const types = Object.keys($report.losses);
         losses = types.map((type, i) => {
             let content = `${$report.losses[type]} ${SOLDIERS[type].name}`;
