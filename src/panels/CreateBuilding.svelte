@@ -130,7 +130,6 @@
         </thead>
         <tbody>
             { #each military as building }
-            { #if !$village.flat().some(t => t.building === building.type) }
             <tr>
                 <td>
                     <img
@@ -159,7 +158,6 @@
                     </button>
                 </td>
             </tr>
-            { /if }
             { /each }
         </tbody>
     </table>
