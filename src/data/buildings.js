@@ -2,18 +2,21 @@ import SOLDIERS from './soldiers';
 
 
 const TYPES = {
+    TOWNHALL: 'buildings/TOWNHALL',
     FARM: 'buildings/FARM',
     SAWMILL: 'buildings/SAWMILL',
     QUARRY: 'buildings/QUARRY',
     IRON_MINE: 'buildings/IRON_MINE',
-    BARRACKS: 'buildings/BARRACKS',
     HUNTING_CABIN: 'buildings/HUNTING_CABIN',
     GEMSTONE_MINE: 'buildings/GEMSTONE_MINE',
+    BARRACKS: 'buildings/BARRACKS',
     STABLE: 'buildings/STABLE',
+    WORKSHOP: 'buildings/WORKSHOP',
 };
 
 
 const CATEGORIES = {
+    SPECIAL: 'buildings/SPECIAL',
     PRODUCTION: 'buildings/PRODUCTION',
     MILITARY: 'buildings/MILITARY',
 };
@@ -22,6 +25,26 @@ const CATEGORIES = {
 export default {
     TYPES,
     CATEGORIES,
+
+    [TYPES.TOWNHALL]: {
+        category: CATEGORIES.SPECIAL,
+        name: 'Town Hall',
+        illus: 'town-hall',
+        maxLevel: 10,
+        requiredVillageCount: 1,
+        cost: {
+            0: { wood: 5, stone: 5, iron: 5 },
+            1: { wood: 10, stone: 10, iron: 10 },
+            2: { wood: 20, stone: 20, iron: 20 },
+            3: { wood: 40, stone: 40, iron: 40 },
+            4: { wood: 80, stone: 80, iron: 80 },
+            5: { wood: 160, stone: 160, iron: 160 },
+            6: { wood: 320, stone: 320, iron: 320 },
+            7: { wood: 600, stone: 600, iron: 600 },
+            8: { wood: 1200, stone: 1200, iron: 1200 },
+            9: { wood: 2500, stone: 2500, iron: 2500 },
+        },
+    },
 
     [TYPES.FARM]: {
         category: CATEGORIES.PRODUCTION,
@@ -163,6 +186,32 @@ export default {
         illus: 'stable',
         maxLevel: 10,
         requiredVillageCount: 2,
+        recruitment: {
+            [SOLDIERS.TYPES.CAVALRY]: 1,
+            [SOLDIERS.TYPES.CHARIOT]: 3,
+            [SOLDIERS.TYPES.KNIGHT]: 6,
+            [SOLDIERS.TYPES.CENTAUR]: 10,
+        },
+        cost: {
+            0: { wood: 20, stone: 10, iron: 10 },
+            1: { wood: 30, stone: 15, iron: 15 },
+            2: { wood: 50, stone: 25, iron: 25 },
+            3: { wood: 80, stone: 40, iron: 40 },
+            4: { wood: 120, stone: 60, iron: 60 },
+            5: { wood: 180, stone: 110, iron: 110 },
+            6: { wood: 250, stone: 140, iron: 140 },
+            7: { wood: 350, stone: 200, iron: 200 },
+            8: { wood: 500, stone: 280, iron: 280 },
+            9: { wood: 700, stone: 400, iron: 400 },
+        },
+    },
+
+    [TYPES.WORKSHOP]: {
+        category: CATEGORIES.MILITARY,
+        name: 'Workshop',
+        illus: 'workshop',
+        maxLevel: 10,
+        requiredVillageCount: 5,
         recruitment: {
             [SOLDIERS.TYPES.CAVALRY]: 1,
             [SOLDIERS.TYPES.CHARIOT]: 3,
